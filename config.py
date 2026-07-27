@@ -1,6 +1,6 @@
 import os
 
-TELEGRAM_TOKEN = "7920428294:AAGfQHtL8QSmxWYMubSEU1bn_GmwDlmbCzQ"
+TELEGRAM_TOKEN = "8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A"
 ADMIN_USERS = [627488088]
 
 MT5_PATH = r"C:\Program Files\MetaTrader 5\terminal64.exe"
