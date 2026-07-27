@@ -14,6 +14,7 @@ logger = logging.getLogger("GoldBot")
 db = Database()
 strategy = Strategy()
 trading_active = {}
+bot_app = None
 
 LANG = {
     "ar": {
@@ -287,9 +288,19 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     await q.answer()
 
 
+async def notify_admin(text: str):
+    global bot_app
+    if not bot_app:
+        return
+    for uid in config.ADMIN_USERS:
+        try:
+            await bot_app.bot.send_message(chat_id=uid, text=text)
+        except Exception as e:
+            logger.error(f"Notify failed to {uid}: {e}")
+
+
 async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
     try:
-        accounts = db.get_stats()
         if db.get_daily_trades() >= config.MAX_DAILY_TRADES:
             return
 
@@ -319,6 +330,21 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             db.add_trade(0, signal, result["price"], sl, tp, config.LOT_SIZE, result["ticket"])
             logger.info(f"Trade: {signal} @ {result['price']}")
 
+            emoji = "🟢" if signal == "BUY" else "🔴"
+            txt = (
+                f"{emoji} Trade Opened\n"
+                f"{'─'*30}\n\n"
+                f"Signal: {signal}\n"
+                f"Price: {result['price']}\n"
+                f"Lot: {config.LOT_SIZE}\n"
+                f"SL: {sl:.2f}\n"
+                f"TP: {tp:.2f}\n\n"
+                f"RSI: {analysis['rsi']}\n"
+                f"Strength: {analysis['strength']}/9\n"
+                f"Ticket: {result['ticket']}"
+            )
+            await notify_admin(txt)
+
     except Exception as e:
         logger.error(f"Loop error: {e}")
 
@@ -328,8 +354,10 @@ async def post_init(app: Application):
 
 
 def main():
+    global bot_app
     logger.info("Starting Gold Trading Bot...")
     app = Application.builder().token(config.TELEGRAM_TOKEN).post_init(post_init).build()
+    bot_app = app
     app.add_handler(CommandHandler("start", cmd_start))
     app.add_handler(CallbackQueryHandler(handler))
     app.job_queue.run_repeating(trading_loop, interval=config.SCAN_INTERVAL_SECONDS, first=10)
