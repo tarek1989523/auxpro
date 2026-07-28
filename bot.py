@@ -371,6 +371,16 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             logger.info(f"Daily limit reached: {daily}/{config.MAX_DAILY_TRADES}")
             return
 
+        info = await asyncio.to_thread(mt5.account_info)
+        if info:
+            balance = info["balance"]
+            equity = info["equity"]
+            if balance > 0:
+                loss_percent = ((balance - equity) / balance) * 100
+                if loss_percent >= config.MAX_DAILY_LOSS_PERCENT:
+                    logger.info(f"Loss limit reached: {loss_percent:.1f}% >= {config.MAX_DAILY_LOSS_PERCENT}%")
+                    return
+
         events = await asyncio.to_thread(fetch_forex_factory)
         if is_high_impact_now(events):
             logger.info("Skipping - high impact news")
