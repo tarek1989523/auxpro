@@ -50,6 +50,17 @@ class Database:
                 )
             """)
             conn.execute("INSERT OR IGNORE INTO stats (id) VALUES (1)")
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS real_accounts (
+                    user_id INTEGER PRIMARY KEY,
+                    login INTEGER NOT NULL,
+                    password TEXT NOT NULL,
+                    server TEXT NOT NULL,
+                    active INTEGER DEFAULT 0,
+                    platform TEXT DEFAULT 'mt5',
+                    connected_at TIMESTAMP
+                )
+            """)
             conn.commit()
 
     def add_user(self, user_id: int, username: str, full_name: str):
@@ -128,3 +139,31 @@ class Database:
     def get_total_users(self) -> int:
         with sqlite3.connect(self.db_path) as conn:
             return conn.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+
+    def save_real_account(self, user_id: int, login: int, password: str, server: str):
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                "INSERT OR REPLACE INTO real_accounts (user_id, login, password, server, active, connected_at) VALUES (?, ?, ?, ?, 1, CURRENT_TIMESTAMP)",
+                (user_id, login, password, server),
+            )
+            conn.commit()
+
+    def get_real_account(self, user_id: int) -> Optional[dict]:
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            row = conn.execute(
+                "SELECT * FROM real_accounts WHERE user_id = ? AND active = 1",
+                (user_id,),
+            ).fetchone()
+            return dict(row) if row else None
+
+    def deactivate_real_account(self, user_id: int):
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("UPDATE real_accounts SET active = 0 WHERE user_id = ?", (user_id,))
+            conn.commit()
+
+    def get_all_active_real_accounts(self) -> list:
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            rows = conn.execute("SELECT * FROM real_accounts WHERE active = 1").fetchall()
+            return [dict(r) for r in rows]

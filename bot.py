@@ -1,8 +1,13 @@
+"""
+Gold Trading Bot - Telegram + MT5
+Features: Auto trading, real account copy trading, multi-timeframe strategy
+"""
 import asyncio
 import logging
 import datetime
+import re
 from telegram import Update, BotCommand, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
 import config
 from database import Database
@@ -80,7 +85,10 @@ def kb(uid: int, rows: list) -> InlineKeyboardMarkup:
 def main_menu(uid: int) -> InlineKeyboardMarkup:
     lang = db.get_lang(uid)
     btns = [
-        [InlineKeyboardButton(L(uid, "account"), callback_data="acct")],
+        [InlineKeyboardButton(L(uid, "account"), callback_data="acct"),
+         InlineKeyboardButton("الحساب الحقيقي", callback_data="real_acct")],
+        [InlineKeyboardButton(L(uid, "trade"), callback_data="start_trade"),
+         InlineKeyboardButton(L(uid, "stop"), callback_data="stop_trade")],
         [InlineKeyboardButton(L(uid, "trade"), callback_data="start_trade"),
          InlineKeyboardButton(L(uid, "stop"), callback_data="stop_trade")],
         [InlineKeyboardButton(L(uid, "positions"), callback_data="positions"),
@@ -155,6 +163,42 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             txt = L(uid, "failed")
         await q.answer()
         await q.edit_message_text(txt, reply_markup=kb(uid, [[InlineKeyboardButton(L(uid, "back"), callback_data="back")]]))
+        return
+
+    if d == "real_acct":
+        ra = await asyncio.to_thread(db.get_real_account, uid)
+        if ra:
+            txt = (
+                f"{'─'*30}\n"
+                f"  الحساب الحقيقي\n"
+                f"{'─'*30}\n\n"
+                f"Login: {ra['login']}\n"
+                f"Server: {ra['server']}\n"
+                f"Connected ✅\n\n"
+                f"يتم نسخ الصفقات تلقائياً"
+            )
+            btns = [[InlineKeyboardButton("فصل الحساب", callback_data="real_disconnect"),
+                     InlineKeyboardButton(L(uid, "back"), callback_data="back")]]
+        else:
+            txt = (
+                f"{'─'*30}\n"
+                f"  الحساب الحقيقي\n"
+                f"{'─'*30}\n\n"
+                f"ليس لديك حساب متصل.\n\n"
+                f"أرسل بيانات حسابك بهذا التنسيق:\n"
+                f"الرقم|كلمة السر|اسم السيرفر\n\n"
+                f"مثال:\n"
+                f"12345678|MyPassword|MetaQuotes-Demo"
+            )
+            btns = [[InlineKeyboardButton(L(uid, "back"), callback_data="back")]]
+        await q.answer()
+        await q.edit_message_text(txt, reply_markup=kb(uid, btns))
+        return
+
+    if d == "real_disconnect":
+        await asyncio.to_thread(db.deactivate_real_account, uid)
+        await q.answer("تم فصل الحساب الحقيقي ✅", show_alert=True)
+        await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
     if d == "start_trade":
@@ -351,6 +395,57 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     await q.answer()
 
 
+async def handle_text(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    uid = update.effective_user.id
+    text = update.message.text.strip()
+    parts = text.split("|")
+    if len(parts) == 3:
+        login_str, password, server = parts
+        login_str = login_str.strip()
+        if not login_str.isdigit():
+            await update.message.reply_text(
+                "❌ خطأ: رقم الحساب يجب أن يكون أرقام فقط\n\n"
+                "أرسل البيانات بهذا التنسيق:\n"
+                "`الرقم|كلمة السر|اسم السيرفر`"
+            )
+            return
+        login = int(login_str)
+        await asyncio.to_thread(db.save_real_account, uid, login, password, server)
+        await update.message.reply_text(
+            f"✅ تم حفظ بيانات الحساب الحقيقي\n\n"
+            f"Login: {login}\n"
+            f"Server: {server}\n\n"
+            "سيتم نسخ الصفقات تلقائياً عند فتحها."
+        )
+    else:
+        await update.message.reply_text(
+            "❌ تنسيق غير صحيح\n\n"
+            "أرسل البيانات بهذا التنسيق:\n"
+            "`الرقم|كلمة السر|اسم السيرفر`\n\n"
+            "مثال:\n"
+            "`12345678|MyPassword|MetaQuotes-Demo`"
+        )
+
+
+async def copy_to_real(order_type: str, lot: float, sl: float, tp: float, price: float) -> bool:
+    accounts = await asyncio.to_thread(db.get_all_active_real_accounts)
+    if not accounts:
+        return False
+    copied = 0
+    for acc in accounts:
+        try:
+            ok = await asyncio.to_thread(mt5.connect, acc["login"], acc["password"], acc["server"])
+            if ok:
+                res = await asyncio.to_thread(mt5.open_order, order_type, lot, sl, tp)
+                if res:
+                    copied += 1
+                    logger.info(f"Copied to real {acc['login']}: {order_type} #{res['ticket']}")
+        except Exception as e:
+            logger.error(f"Copy failed to {acc['login']}: {e}")
+    await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
+    return copied > 0
+
+
 async def notify_admin(text: str):
     global bot_app
     if not bot_app:
@@ -424,6 +519,7 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
                 failed += 1
 
         if opened:
+            copied = await copy_to_real(signal, config.LOT_SIZE, sl, tp, price)
             emoji = "🟢" if signal == "BUY" else "🔴"
             reasons_str = ", ".join(analysis["reasons"]) if analysis["reasons"] else "-"
             txt = (
@@ -436,13 +532,13 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
                 f"TP: {tp:.2f} ({analysis['tp_pips']:.1f} pips)\n\n"
                 f"Score: {analysis['strength']}/12\n"
                 f"SuperTrend: {analysis['st_dir']}\n"
-                f"PSAR: {analysis['psar_dir']}\n"
-                f"MACD: {analysis['macd']}\n"
                 f"RSI: {analysis['rsi']}\n"
                 f"Volume: {analysis['vol']}x\n\n"
                 f"Reasons: {reasons_str}\n"
                 f"Opened: {len(opened)} | Failed: {failed}"
             )
+            if copied:
+                txt += "\n\n✅ Copied to Real Account"
             await notify_admin(txt)
             logger.info(f"Opened {len(opened)}x {signal} trades")
 
@@ -465,6 +561,7 @@ def main():
     app = Application.builder().token(config.TELEGRAM_TOKEN).post_init(post_init).build()
     bot_app = app
     app.add_handler(CommandHandler("start", cmd_start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
     app.add_handler(CallbackQueryHandler(handler))
     app.job_queue.run_repeating(trading_loop, interval=config.SCAN_INTERVAL_SECONDS, first=10)
     app.job_queue.run_daily(daily_reset, time=datetime.time(hour=0, minute=0))
