@@ -188,6 +188,32 @@ def modify_sl(ticket: int, new_sl: float) -> bool:
         return False
 
 
+def close_position(ticket: int) -> bool:
+    with _lock:
+        pos = mt5.positions_get(ticket=ticket)
+        if not pos:
+            return False
+        p = pos[0]
+        si = mt5.symbol_info(config.SYMBOL)
+        if si is None:
+            return False
+        close_type = mt5.ORDER_TYPE_SELL if p.type == mt5.ORDER_TYPE_BUY else mt5.ORDER_TYPE_BUY
+        price = si.bid if p.type == mt5.ORDER_TYPE_BUY else si.ask
+        req = {
+            "action": mt5.TRADE_ACTION_DEAL, "symbol": config.SYMBOL,
+            "volume": p.volume, "type": close_type, "position": ticket,
+            "price": price, "deviation": 30, "magic": config.MAGIC,
+            "comment": "ProfitClose", "type_time": mt5.ORDER_TIME_GTC,
+            "type_filling": mt5.ORDER_FILLING_IOC,
+        }
+        res = mt5.order_send(req)
+        if res and res.retcode == mt5.TRADE_RETCODE_DONE:
+            logger.info(f"Closed {ticket} profit={p.profit:.2f}")
+            return True
+        logger.error(f"Close failed: {res}")
+        return False
+
+
 def trailing_stop():
     if not config.TRAILING_STOP_ENABLED:
         return
@@ -209,20 +235,34 @@ def trailing_stop():
             point = si.point
             pip = point * 10
 
+            if p.profit >= 0.5:
+                logger.info(f"Profit hit ${p.profit:.2f} closing {p.ticket}")
+                mt5.order_send({
+                    "action": mt5.TRADE_ACTION_DEAL, "symbol": config.SYMBOL,
+                    "volume": p.volume,
+                    "type": mt5.ORDER_TYPE_SELL if p.type == mt5.ORDER_TYPE_BUY else mt5.ORDER_TYPE_BUY,
+                    "position": p.ticket,
+                    "price": si.bid if p.type == mt5.ORDER_TYPE_BUY else si.ask,
+                    "deviation": 30, "magic": config.MAGIC,
+                    "comment": "ProfitClose", "type_time": mt5.ORDER_TIME_GTC,
+                    "type_filling": mt5.ORDER_FILLING_IOC,
+                })
+                continue
+
             if p.type == mt5.ORDER_TYPE_BUY:
                 profit_pips = (current - open_price) / pip
 
-                if profit_pips >= 10:
-                    breakeven_sl = open_price + (3 * pip)
+                if profit_pips >= 3:
+                    breakeven_sl = open_price + (1 * pip)
                     if current_sl == 0 or current_sl < breakeven_sl:
                         mt5.order_send({
                             "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
                             "position": p.ticket, "sl": round(breakeven_sl, digits), "tp": p.tp,
                         })
-                        logger.info(f"BE+3 BUY {p.ticket}: SL -> {breakeven_sl:.2f} (+{profit_pips:.0f} pip)")
+                        logger.info(f"BE+1 BUY {p.ticket}: SL -> {breakeven_sl:.2f} (+{profit_pips:.0f} pip)")
 
-                if profit_pips >= 25:
-                    trail_sl = current - (10 * pip)
+                if profit_pips >= 5:
+                    trail_sl = current - (3 * pip)
                     if trail_sl > current_sl:
                         mt5.order_send({
                             "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
@@ -233,17 +273,17 @@ def trailing_stop():
             elif p.type == mt5.ORDER_TYPE_SELL:
                 profit_pips = (open_price - current) / pip
 
-                if profit_pips >= 10:
-                    breakeven_sl = open_price - (3 * pip)
+                if profit_pips >= 3:
+                    breakeven_sl = open_price - (1 * pip)
                     if current_sl == 0 or current_sl > breakeven_sl:
                         mt5.order_send({
                             "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
                             "position": p.ticket, "sl": round(breakeven_sl, digits), "tp": p.tp,
                         })
-                        logger.info(f"BE+3 SELL {p.ticket}: SL -> {breakeven_sl:.2f} (+{profit_pips:.0f} pip)")
+                        logger.info(f"BE+1 SELL {p.ticket}: SL -> {breakeven_sl:.2f} (+{profit_pips:.0f} pip)")
 
-                if profit_pips >= 25:
-                    trail_sl = current + (10 * pip)
+                if profit_pips >= 5:
+                    trail_sl = current + (3 * pip)
                     if trail_sl < current_sl:
                         mt5.order_send({
                             "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
