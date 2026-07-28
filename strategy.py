@@ -215,12 +215,24 @@ class Strategy:
         c = m1["c"]; p = m1["p"]
 
         trend_buy = 0; trend_sell = 0
-        if df_m5 is not None and len(df_m5) >= 55:
-            m5 = self._analyze_tf(df_m5)
-            trend_buy += m5["buy"]; trend_sell += m5["sell"]
+        trend_dir = "NONE"
+
         if df_m15 is not None and len(df_m15) >= 55:
             m15 = self._analyze_tf(df_m15)
             trend_buy += m15["buy"]; trend_sell += m15["sell"]
+            if m15["c"]["st_dir"] == 1 and m15["c"]["ema5"] > m15["c"]["ema20"]:
+                trend_dir = "UP"
+            elif m15["c"]["st_dir"] == -1 and m15["c"]["ema5"] < m15["c"]["ema20"]:
+                trend_dir = "DN"
+
+        if df_m5 is not None and len(df_m5) >= 55:
+            m5 = self._analyze_tf(df_m5)
+            trend_buy += m5["buy"]; trend_sell += m5["sell"]
+            if trend_dir == "NONE":
+                if m5["c"]["st_dir"] == 1 and m5["c"]["ema5"] > m5["c"]["ema20"]:
+                    trend_dir = "UP"
+                elif m5["c"]["st_dir"] == -1 and m5["c"]["ema5"] < m5["c"]["ema20"]:
+                    trend_dir = "DN"
 
         buy_score = m1["buy"] + trend_buy
         sell_score = m1["sell"] + trend_sell
@@ -276,10 +288,13 @@ class Strategy:
             if pos_in_range > 0.92 or pos_in_range < 0.08: at_peak = True
 
         signal = "NONE"; strength = 0; reasons = []
-        if buy_score >= config.MIN_BUY_SCORE and buy_score > sell_score + 1:
+        if buy_score >= config.MIN_BUY_SCORE and buy_score > sell_score + 1 and trend_dir != "DN":
             signal = "BUY"; strength = buy_score; reasons = reasons_b
-        elif sell_score >= config.MIN_SELL_SCORE and sell_score > buy_score + 1:
+        elif sell_score >= config.MIN_SELL_SCORE and sell_score > buy_score + 1 and trend_dir != "UP":
             signal = "SELL"; strength = sell_score; reasons = reasons_s
+
+        if trend_dir != "NONE":
+            reasons.append(f"Trend: {trend_dir}")
 
         sl_pips = config.STOP_LOSS_PIPS
         tp_pips = config.TAKE_PROFIT_PIPS
@@ -298,6 +313,7 @@ class Strategy:
             "sl_dist": round(sl_pips * 0.1, 4), "tp_dist": round(tp_pips * 0.1, 4),
             "sl_pips": round(sl_pips, 2), "tp_pips": round(tp_pips, 2),
             "buy_score": buy_score, "sell_score": sell_score,
+            "trend": trend_dir,
         }
 
     def _none(self):
