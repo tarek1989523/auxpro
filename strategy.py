@@ -281,9 +281,8 @@ class Strategy:
         elif sell_score >= config.MIN_SELL_SCORE and sell_score > buy_score + 1:
             signal = "SELL"; strength = sell_score; reasons = reasons_s
 
-        sl_pips = max(atr_pips * 0.8, 12)
-        tp_pips = max(atr_pips * 1.2, 20)
-        if tp_pips < sl_pips * 1.3: tp_pips = sl_pips * 1.3
+        sl_pips = config.STOP_LOSS_PIPS
+        tp_pips = config.TAKE_PROFIT_PIPS
 
         return {
             "signal": signal, "strength": strength, "reasons": reasons,
