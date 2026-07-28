@@ -332,7 +332,8 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             return
 
         pos = await asyncio.to_thread(mt5.get_positions)
-        if len(pos) >= config.MAX_POSITIONS:
+        remaining = config.MAX_POSITIONS - len(pos)
+        if remaining <= 0:
             return
 
         signal = analysis["signal"]
@@ -340,18 +341,27 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         sl = price - analysis["sl_dist"] if signal == "BUY" else price + analysis["sl_dist"]
         tp = price + analysis["tp_dist"] if signal == "BUY" else price - analysis["tp_dist"]
 
-        result = await asyncio.to_thread(mt5.open_order, signal, config.LOT_SIZE, sl, tp)
-        if result:
-            db.add_trade(0, signal, result["price"], sl, tp, config.LOT_SIZE, result["ticket"])
-            logger.info(f"Trade: {signal} @ {result['price']}")
+        open_count = min(config.TRADES_PER_SIGNAL, remaining)
+        opened = []
+        failed = 0
 
+        for i in range(open_count):
+            result = await asyncio.to_thread(mt5.open_order, signal, config.LOT_SIZE, sl, tp)
+            if result:
+                db.add_trade(0, signal, result["price"], sl, tp, config.LOT_SIZE, result["ticket"])
+                opened.append(result["ticket"])
+            else:
+                failed += 1
+
+        if opened:
             emoji = "🟢" if signal == "BUY" else "🔴"
             reasons_str = ", ".join(analysis["reasons"]) if analysis["reasons"] else "-"
             txt = (
-                f"{emoji} {signal} Trade Opened\n"
+                f"{emoji} {len(opened)}x {signal} Trades Opened\n"
                 f"{'─'*30}\n\n"
-                f"Price: {result['price']}\n"
-                f"Lot: {config.LOT_SIZE}\n"
+                f"Price: {price}\n"
+                f"Lot each: {config.LOT_SIZE}\n"
+                f"Total lot: {config.LOT_SIZE * len(opened)}\n"
                 f"SL: {sl:.2f} ({analysis['sl_pips']:.1f} pips)\n"
                 f"TP: {tp:.2f} ({analysis['tp_pips']:.1f} pips)\n\n"
                 f"Score: {analysis['strength']}/12\n"
@@ -361,9 +371,10 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
                 f"RSI: {analysis['rsi']}\n"
                 f"Volume: {analysis['vol']}x\n\n"
                 f"Reasons: {reasons_str}\n"
-                f"Ticket: {result['ticket']}"
+                f"Opened: {len(opened)} | Failed: {failed}"
             )
             await notify_admin(txt)
+            logger.info(f"Opened {len(opened)}x {signal} trades")
 
     except Exception as e:
         logger.error(f"Loop error: {e}")
