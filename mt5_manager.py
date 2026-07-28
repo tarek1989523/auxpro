@@ -235,7 +235,7 @@ def trailing_stop():
             point = si.point
             pip = point * 10
 
-            if p.profit >= 0.5:
+            if p.profit >= 2.0:
                 logger.info(f"Profit hit ${p.profit:.2f} closing {p.ticket}")
                 mt5.order_send({
                     "action": mt5.TRADE_ACTION_DEAL, "symbol": config.SYMBOL,

@@ -395,8 +395,7 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             return
 
         # REVERSE: strategy BUY -> open SELL, strategy SELL -> open BUY
-        signal = "SELL" if sig == "BUY" else "BUY"
-        logger.info(f"Reverse: {sig} -> {signal}")
+        signal = sig
 
         pos = await asyncio.to_thread(mt5.get_positions)
         remaining = config.MAX_POSITIONS - len(pos)
