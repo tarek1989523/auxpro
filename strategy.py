@@ -72,6 +72,71 @@ class Strategy:
         df["psar_dir"] = [1 if df["close"].iloc[i] > psar[i] else -1 for i in range(n)]
         return df
 
+    def _find_sr_levels(self, df, lookback=50, tolerance=0.002):
+        levels = []
+        highs = df["high"].values
+        lows = df["low"].values
+        n = len(df)
+
+        for i in range(2, min(lookback, n - 2)):
+            idx = n - 1 - i
+            if idx < 2 or idx >= n - 2:
+                continue
+
+            if highs[idx] > highs[idx - 1] and highs[idx] > highs[idx - 2] and \
+               highs[idx] > highs[idx + 1] and highs[idx] > highs[idx + 2]:
+                levels.append({"price": highs[idx], "type": "resistance", "strength": 1})
+
+            if lows[idx] < lows[idx - 1] and lows[idx] < lows[idx - 2] and \
+               lows[idx] < lows[idx + 1] and lows[idx] < lows[idx + 2]:
+                levels.append({"price": lows[idx], "type": "support", "strength": 1})
+
+        merged = []
+        for lv in levels:
+            found = False
+            for m in merged:
+                if abs(lv["price"] - m["price"]) / m["price"] < tolerance:
+                    m["strength"] += 1
+                    found = True
+                    break
+            if not found:
+                merged.append(lv.copy())
+
+        return sorted(merged, key=lambda x: x["strength"], reverse=True)[:10]
+
+    def _check_sr(self, price, levels, atr_pips):
+        zone = atr_pips * 0.3
+        near_support = False
+        near_resistance = False
+        sr_bonus_buy = 0
+        sr_bonus_sell = 0
+        sr_reason_b = ""
+        sr_reason_s = ""
+
+        for lv in levels:
+            dist_pips = abs(price - lv["price"]) / 0.01
+            if dist_pips > zone:
+                continue
+
+            if lv["type"] == "support" and dist_pips < zone:
+                sr_bonus_buy = min(lv["strength"] * 2, 6)
+                sr_reason_b = f"Support {lv['price']:.2f} x{lv['strength']}"
+                near_support = True
+
+            if lv["type"] == "resistance" and dist_pips < zone:
+                sr_bonus_sell = min(lv["strength"] * 2, 6)
+                sr_reason_s = f"Resistance {lv['price']:.2f} x{lv['strength']}"
+                near_resistance = True
+
+        return {
+            "near_support": near_support,
+            "near_resistance": near_resistance,
+            "buy_bonus": sr_bonus_buy,
+            "sell_bonus": sr_bonus_sell,
+            "reason_b": sr_reason_b,
+            "reason_s": sr_reason_s,
+        }
+
     def _calc(self, df):
         df = df.copy()
         df["ema5"] = ta.trend.ema_indicator(df["close"], window=5)
@@ -196,6 +261,29 @@ class Strategy:
         if trend_sell > 10:
             reasons_s.append("M5+M15 trend DN")
 
+        price = c["close"]
+        atr_pips = c["atr_pips"]
+
+        sr_levels = self._find_sr_levels(df_m1, lookback=60)
+
+        sr5_levels = []
+        sr15_levels = []
+        if df_m5 is not None and len(df_m5) >= 20:
+            sr5_levels = self._find_sr_levels(df_m5, lookback=40)
+        if df_m15 is not None and len(df_m15) >= 20:
+            sr15_levels = self._find_sr_levels(df_m15, lookback=30)
+
+        all_sr = sr_levels + sr5_levels + sr15_levels
+        sr_info = self._check_sr(price, all_sr, atr_pips)
+
+        buy_score += sr_info["buy_bonus"]
+        sell_score += sr_info["sell_bonus"]
+
+        if sr_info["near_support"]:
+            reasons_b.append(sr_info["reason_b"])
+        if sr_info["near_resistance"]:
+            reasons_s.append(sr_info["reason_s"])
+
         rsi = c["rsi"]
         at_peak = False
         if rsi > 75:
@@ -203,7 +291,6 @@ class Strategy:
         if rsi < 25:
             at_peak = True
 
-        price = c["close"]
         recent_high = df_m1["high"].iloc[-30:].max()
         recent_low = df_m1["low"].iloc[-30:].min()
         price_range = recent_high - recent_low
@@ -214,6 +301,11 @@ class Strategy:
                 at_peak = True
             if pos_in_range < 0.10:
                 at_peak = True
+
+        if sr_info["near_support"] and sell_score > buy_score:
+            at_peak = True
+        if sr_info["near_resistance"] and buy_score > sell_score:
+            at_peak = True
 
         signal = "NONE"
         strength = 0
@@ -228,7 +320,6 @@ class Strategy:
             strength = sell_score
             reasons = reasons_s
 
-        atr_pips = c["atr_pips"]
         sl_pips = max(atr_pips * 0.8, 15)
         tp_pips = max(atr_pips * 1.5, 25)
 
