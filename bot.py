@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import datetime
 from telegram import Update, BotCommand, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
@@ -370,6 +371,12 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             logger.info(f"Daily limit reached: {daily}/{config.MAX_DAILY_TRADES}")
             return
 
+        stats = db.get_stats()
+        daily_pnl = stats.get("daily_pnl", 0)
+        if daily_pnl <= -config.MAX_DAILY_LOSS_USD:
+            logger.info(f"Daily loss limit reached: {daily_pnl:.2f}$")
+            return
+
         events = await asyncio.to_thread(fetch_forex_factory)
         if is_high_impact_now(events):
             logger.info("Skipping - high impact news")
@@ -408,16 +415,16 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         same_count = len(same_dir)
 
         if same_count == 0:
-            open_count = min(5, remaining)
-        elif same_count < 8:
-            open_count = min(3, remaining)
-        elif same_count < 15:
-            open_count = min(2, remaining)
+            if analysis["strength"] >= 16:
+                open_count = min(2, remaining)
+            else:
+                open_count = 1
+        elif same_count < 3:
+            open_count = 1
+        elif same_count < 6:
+            open_count = 1
         else:
-            open_count = min(1, remaining)
-
-        if open_count <= 0:
-            return
+            open_count = 0
 
         if open_count <= 0:
             return
@@ -460,6 +467,11 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Loop error: {e}")
 
 
+async def daily_reset(ctx: ContextTypes.DEFAULT_TYPE):
+    db.reset_daily()
+    logger.info("Daily stats reset")
+
+
 async def post_init(app: Application):
     await app.bot.set_my_commands([BotCommand("start", "Start")])
 
@@ -472,6 +484,7 @@ def main():
     app.add_handler(CommandHandler("start", cmd_start))
     app.add_handler(CallbackQueryHandler(handler))
     app.job_queue.run_repeating(trading_loop, interval=config.SCAN_INTERVAL_SECONDS, first=10)
+    app.job_queue.run_daily(daily_reset, time=datetime.time(hour=0, minute=0))
     logger.info("Bot running...")
     app.run_polling(drop_pending_updates=True)
 
