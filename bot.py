@@ -364,43 +364,32 @@ async def notify_admin(text: str):
 
 async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
     try:
-        await asyncio.to_thread(mt5.trailing_stop)
-
-        daily = db.get_daily_trades()
-        if daily >= config.MAX_DAILY_TRADES:
-            logger.info(f"Daily limit reached: {daily}/{config.MAX_DAILY_TRADES}")
+        connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
+        if not connected:
+            logger.error("MT5 connect failed")
             return
 
-        info = await asyncio.to_thread(mt5.account_info)
-        if info:
-            balance = info["balance"]
-            equity = info["equity"]
-            if balance > 0:
-                loss_percent = ((balance - equity) / balance) * 100
-                if loss_percent >= config.MAX_DAILY_LOSS_PERCENT:
-                    logger.info(f"Loss limit reached: {loss_percent:.1f}% >= {config.MAX_DAILY_LOSS_PERCENT}%")
-                    return
+        try:
+            await asyncio.to_thread(mt5.trailing_stop)
+        except Exception:
+            pass
 
         events = await asyncio.to_thread(fetch_forex_factory)
         if is_high_impact_now(events):
-            logger.info("Skipping - high impact news")
-            return
-
-        connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
-        if not connected:
-            logger.info("MT5 not connected")
+            logger.info("Skipping: news")
             return
 
         df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
+        if df is None:
+            logger.error("No M1 data")
+            return
+
         df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
         df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
-        if df is None:
-            logger.info("No OHLCV data")
-            return
 
         analysis = strategy.analyze(df, df5, df15)
         sig = analysis["signal"]
-        logger.info(f"Scan: signal={sig} buy={analysis['buy_score']} sell={analysis['sell_score']} daily={daily}/{config.MAX_DAILY_TRADES}")
+        logger.info(f"Scan: {sig} buy={analysis['buy_score']} sell={analysis['sell_score']} trend={analysis.get('trend','?')}")
 
         if sig not in ("BUY", "SELL"):
             return
