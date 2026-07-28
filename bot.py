@@ -165,13 +165,20 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             info = await asyncio.to_thread(mt5.account_info)
             trading_active[uid] = True
             bal = f"{info['balance']:.2f}$" if info else "?"
+
+            df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
+            analysis = strategy.analyze(df) if df is not None else {"signal": "NONE"}
+
             txt = (
                 f"{'─'*30}\n"
                 f"  {L(uid, 'connected')}\n"
                 f"{'─'*30}\n\n"
                 f"Account: {info['login']}\n"
                 f"Balance: {bal}\n"
-                f"Scan: {config.SCAN_INTERVAL_SECONDS}s"
+                f"Scan: {config.SCAN_INTERVAL_SECONDS}s\n\n"
+                f"Market: {analysis['signal']}\n"
+                f"Buy: {analysis.get('buy_score', 0)} | Sell: {analysis.get('sell_score', 0)}\n"
+                f"Status: Trading ACTIVE"
             )
         else:
             txt = L(uid, "failed")
@@ -346,7 +353,9 @@ async def notify_admin(text: str):
 
 async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
     try:
-        if db.get_daily_trades() >= config.MAX_DAILY_TRADES:
+        daily = db.get_daily_trades()
+        if daily >= config.MAX_DAILY_TRADES:
+            logger.info(f"Daily limit reached: {daily}/{config.MAX_DAILY_TRADES}")
             return
 
         events = await asyncio.to_thread(fetch_forex_factory)
@@ -354,22 +363,21 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             logger.info("Skipping - high impact news")
             return
 
-        news = await asyncio.to_thread(fetch_gold_news)
-        sentiment = get_market_sentiment(news)
-        if sentiment["score"] < 0:
-            logger.info("Skipping - bearish sentiment")
-            return
-
         connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
         if not connected:
+            logger.info("MT5 not connected")
             return
 
         df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
         if df is None:
+            logger.info("No OHLCV data")
             return
 
         analysis = strategy.analyze(df)
-        if analysis["signal"] not in ("BUY", "SELL"):
+        sig = analysis["signal"]
+        logger.info(f"Scan: signal={sig} buy={analysis['buy_score']} sell={analysis['sell_score']} daily={daily}/{config.MAX_DAILY_TRADES}")
+
+        if sig not in ("BUY", "SELL"):
             return
 
         pos = await asyncio.to_thread(mt5.get_positions)
@@ -411,7 +419,6 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
                 f"MACD: {analysis['macd']}\n"
                 f"RSI: {analysis['rsi']}\n"
                 f"Volume: {analysis['vol']}x\n\n"
-                f"Market: {sentiment['emoji']} {sentiment['label']}\n"
                 f"Reasons: {reasons_str}\n"
                 f"Opened: {len(opened)} | Failed: {failed}"
             )

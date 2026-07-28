@@ -214,11 +214,11 @@ class Strategy:
         strength = 0
         reasons = []
 
-        if buy_score >= 8 and buy_score > sell_score + 2:
+        if buy_score >= config.MIN_BUY_SCORE and buy_score > sell_score + 1:
             signal = "BUY"
             strength = buy_score
             reasons = reasons_b
-        elif sell_score >= 8 and sell_score > buy_score + 2:
+        elif sell_score >= config.MIN_SELL_SCORE and sell_score > buy_score + 1:
             signal = "SELL"
             strength = sell_score
             reasons = reasons_s
