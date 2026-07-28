@@ -202,20 +202,29 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await q.answer()
         connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
         if connected:
-            df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 200)
+            df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
             if df is not None:
                 a = strategy.analyze(df)
                 txt = (
                     f"{'─'*30}\n  {L(uid, 'analyze')}\n{'─'*30}\n\n"
                     f"Signal: {a['signal']}\n"
-                    f"Strength: {a['strength']}/9\n"
+                    f"Strength: {a['strength']}/15\n"
+                    f"Buy Score: {a['buy_score']} | Sell Score: {a['sell_score']}\n"
+                    f"{'─'*30}\n"
                     f"Price: {a['price']}\n"
-                    f"RSI: {a['rsi']}\n"
-                    f"EMA: {a['ema_f']}/{a['ema_s']}/{a['ema_t']}\n"
+                    f"RSI(14): {a['rsi']} | RSI(6): {a['rsi_6']}\n"
+                    f"Stoch: {a['stoch_k']}/{a['stoch_d']}\n"
                     f"MACD: {a['macd']}\n"
-                    f"ATR: {a['atr']}\n"
-                    f"Volume: {a['vol']}x"
+                    f"ADX: {a['adx']}\n"
+                    f"ATR: {a['atr_pips']:.1f} pips\n"
+                    f"BB Width: {a['bb_width']}\n"
+                    f"EMA: {a['ema8']}/{a['ema21']}/{a['ema50']}/{a['ema200']}\n"
+                    f"Volume: {a['vol']}x\n\n"
+                    f"SL: {a['sl_pips']:.1f} pips\n"
+                    f"TP: {a['tp_pips']:.1f} pips\n"
                 )
+                if a["reasons"]:
+                    txt += f"\nReasons: {', '.join(a['reasons'])}"
             else:
                 txt = "No data"
         else:
@@ -308,7 +317,7 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         if not connected:
             return
 
-        df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 200)
+        df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
         if df is None:
             return
 
@@ -331,16 +340,22 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             logger.info(f"Trade: {signal} @ {result['price']}")
 
             emoji = "🟢" if signal == "BUY" else "🔴"
+            reasons_str = ", ".join(analysis["reasons"]) if analysis["reasons"] else "-"
             txt = (
-                f"{emoji} Trade Opened\n"
+                f"{emoji} {signal} Trade Opened\n"
                 f"{'─'*30}\n\n"
-                f"Signal: {signal}\n"
                 f"Price: {result['price']}\n"
                 f"Lot: {config.LOT_SIZE}\n"
-                f"SL: {sl:.2f}\n"
-                f"TP: {tp:.2f}\n\n"
+                f"SL: {sl:.2f} ({analysis['sl_pips']:.1f} pips)\n"
+                f"TP: {tp:.2f} ({analysis['tp_pips']:.1f} pips)\n\n"
+                f"Score: {analysis['strength']}/15\n"
                 f"RSI: {analysis['rsi']}\n"
-                f"Strength: {analysis['strength']}/9\n"
+                f"Stoch: {analysis['stoch_k']}/{analysis['stoch_d']}\n"
+                f"MACD: {analysis['macd']}\n"
+                f"ADX: {analysis['adx']}\n"
+                f"ATR: {analysis['atr_pips']:.1f} pips\n"
+                f"Volume: {analysis['vol']}x\n\n"
+                f"Reasons: {reasons_str}\n"
                 f"Ticket: {result['ticket']}"
             )
             await notify_admin(txt)
