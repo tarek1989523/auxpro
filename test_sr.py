@@ -7,13 +7,12 @@ df5 = pd.DataFrame(mt5.copy_rates_from_pos('XAUUSD', mt5.TIMEFRAME_M5, 0, 250));
 df15 = pd.DataFrame(mt5.copy_rates_from_pos('XAUUSD', mt5.TIMEFRAME_M15, 0, 250)); df15['time'] = pd.to_datetime(df15['time'], unit='s')
 s = Strategy()
 a = s.analyze(df1, df5, df15)
-print('Signal:', a['signal'], '| Buy:', a['buy_score'], '| Sell:', a['sell_score'])
-print('At Peak:', a['at_peak'], '| RSI:', a['rsi'])
-print('Reasons:', a['reasons'])
-sr = s._find_sr_levels(df1, 60)
-for lv in sr[:5]:
-    t = lv['type']
-    p = lv['price']
-    st = lv['strength']
-    print(f'  {t} @ {p:.2f} x{st}')
+print("=== SCALPING STRATEGY ===")
+print("Signal:", a['signal'], "| Buy:", a['buy_score'], "| Sell:", a['sell_score'])
+print("Price:", a['price'])
+print("RSI:", a['rsi'])
+print("BB Upper:", a['bb_upper'], "| Lower:", a['bb_lower'], "| Mid:", a['bb_mid'])
+print("SuperTrend:", a['st_dir'], "| PSAR:", a['psar_dir'])
+print("SL:", a['sl_pips'], "pip | TP:", a['tp_pips'], "pip")
+print("Reasons:", a['reasons'])
 mt5.shutdown()

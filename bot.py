@@ -407,42 +407,17 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         same_dir = [p for p in pos if p["type"] == signal]
         same_count = len(same_dir)
 
-        buy_count = len([p for p in pos if p["type"] == "BUY"])
-        sell_count = len([p for p in pos if p["type"] == "SELL"])
-
         if same_count == 0:
-            if analysis["strength"] >= 8:
-                open_count = min(2, remaining)
-            else:
-                open_count = 1
-        elif same_count < 3:
-            if signal == "BUY":
-                near = price < df["ema5"].iloc[-1]
-            else:
-                near = price > df["ema5"].iloc[-1]
-            if not near:
-                return
-            open_count = 1
-        elif same_count < 6:
-            if signal == "BUY":
-                near = price < df["ema10"].iloc[-1]
-            else:
-                near = price > df["ema10"].iloc[-1]
-            if not near:
-                return
-            open_count = 1
+            open_count = min(5, remaining)
+        elif same_count < 8:
+            open_count = min(3, remaining)
+        elif same_count < 15:
+            open_count = min(2, remaining)
         else:
-            if signal == "BUY":
-                near = price < df["ema20"].iloc[-1]
-            else:
-                near = price > df["ema20"].iloc[-1]
-            if not near:
-                return
-            open_count = 1
+            open_count = min(1, remaining)
 
-        if buy_count > 0 and sell_count > 0:
-            if same_count >= 3:
-                return
+        if open_count <= 0:
+            return
 
         if open_count <= 0:
             return
