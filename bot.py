@@ -7,6 +7,7 @@ import config
 from database import Database
 import mt5_manager as mt5
 from strategy import Strategy
+from news import fetch_forex_factory, is_high_impact_now, get_news_summary
 
 logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
 logger = logging.getLogger("GoldBot")
@@ -83,8 +84,10 @@ def main_menu(uid: int) -> InlineKeyboardMarkup:
          InlineKeyboardButton(L(uid, "stop"), callback_data="stop_trade")],
         [InlineKeyboardButton(L(uid, "positions"), callback_data="positions"),
          InlineKeyboardButton(L(uid, "analyze"), callback_data="analyze")],
-        [InlineKeyboardButton(L(uid, "results"), callback_data="results"),
-         InlineKeyboardButton(L(uid, "settings"), callback_data="settings")],
+        [InlineKeyboardButton("News", callback_data="news"),
+         InlineKeyboardButton(L(uid, "results"), callback_data="results")],
+        [InlineKeyboardButton(L(uid, "settings"), callback_data="settings"),
+         InlineKeyboardButton(L(uid, "help"), callback_data="help")],
         [InlineKeyboardButton(L(uid, "lang_btn"), callback_data="lang_toggle")],
     ]
     if is_admin(uid):
@@ -300,6 +303,20 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await q.edit_message_text(txt, reply_markup=kb(uid, [[InlineKeyboardButton(L(uid, "back"), callback_data="back")]]))
         return
 
+    if d == "news":
+        await q.answer()
+        events = await asyncio.to_thread(fetch_forex_factory)
+        now_trading = is_high_impact_now(events)
+        summary = get_news_summary(events)
+        status = "STOP TRADING" if now_trading else "Safe to trade"
+        txt = (
+            f"{'─'*30}\n  Economic News\n{'─'*30}\n\n"
+            f"Status: {status}\n\n"
+            f"High Impact Events:\n{summary}"
+        )
+        await q.edit_message_text(txt, reply_markup=main_menu(uid))
+        return
+
     await q.answer()
 
 
@@ -317,6 +334,11 @@ async def notify_admin(text: str):
 async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
     try:
         if db.get_daily_trades() >= config.MAX_DAILY_TRADES:
+            return
+
+        events = await asyncio.to_thread(fetch_forex_factory)
+        if is_high_impact_now(events):
+            logger.info("Skipping trade - high impact news")
             return
 
         connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
