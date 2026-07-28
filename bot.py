@@ -7,7 +7,7 @@ import config
 from database import Database
 import mt5_manager as mt5
 from strategy import Strategy
-from news import fetch_forex_factory, is_high_impact_now, get_news_summary
+from news import fetch_forex_factory, is_high_impact_now, fetch_gold_news, get_market_sentiment
 
 logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
 logger = logging.getLogger("GoldBot")
@@ -307,13 +307,26 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await q.answer()
         events = await asyncio.to_thread(fetch_forex_factory)
         now_trading = is_high_impact_now(events)
-        summary = get_news_summary(events)
+        news = await asyncio.to_thread(fetch_gold_news)
+        sentiment = get_market_sentiment(news)
         status = "STOP TRADING" if now_trading else "Safe to trade"
+
         txt = (
-            f"{'─'*30}\n  Economic News\n{'─'*30}\n\n"
-            f"Status: {status}\n\n"
-            f"High Impact Events:\n{summary}"
+            f"{'─'*30}\n  Gold News & Analysis\n{'─'*30}\n\n"
+            f"Status: {status}\n"
+            f"Market: {sentiment['emoji']} {sentiment['label']}\n"
+            f"Bullish: {sentiment.get('bull', 0)} | Bearish: {sentiment.get('bear', 0)}\n\n"
         )
+
+        for i, n in enumerate(news[:5], 1):
+            s = n["sentiment"]
+            txt += f"{s['emoji']} {n['title'][:60]}\n   Source: {n['source']}\n\n"
+
+        if events:
+            txt += f"{'─'*30}\n  Economic Calendar\n{'─'*30}\n\n"
+            for e in events[:3]:
+                txt += f"  {e['country']} | {e['title']}\n"
+
         await q.edit_message_text(txt, reply_markup=main_menu(uid))
         return
 
@@ -338,7 +351,13 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
 
         events = await asyncio.to_thread(fetch_forex_factory)
         if is_high_impact_now(events):
-            logger.info("Skipping trade - high impact news")
+            logger.info("Skipping - high impact news")
+            return
+
+        news = await asyncio.to_thread(fetch_gold_news)
+        sentiment = get_market_sentiment(news)
+        if sentiment["score"] < 0:
+            logger.info("Skipping - bearish sentiment")
             return
 
         connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
@@ -392,6 +411,7 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
                 f"MACD: {analysis['macd']}\n"
                 f"RSI: {analysis['rsi']}\n"
                 f"Volume: {analysis['vol']}x\n\n"
+                f"Market: {sentiment['emoji']} {sentiment['label']}\n"
                 f"Reasons: {reasons_str}\n"
                 f"Opened: {len(opened)} | Failed: {failed}"
             )
