@@ -369,19 +369,12 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             logger.error("MT5 connect failed")
             return
 
-        try:
-            await asyncio.to_thread(mt5.trailing_stop)
-        except Exception:
-            pass
-
         events = await asyncio.to_thread(fetch_forex_factory)
         if is_high_impact_now(events):
-            logger.info("Skipping: news")
             return
 
         df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
         if df is None:
-            logger.error("No M1 data")
             return
 
         df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
@@ -394,10 +387,14 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         if sig not in ("BUY", "SELL"):
             return
 
-        # REVERSE: strategy BUY -> open SELL, strategy SELL -> open BUY
         signal = sig
 
         pos = await asyncio.to_thread(mt5.get_positions)
+
+        for p in pos:
+            if p["profit"] >= config.PROFIT_CLOSE_AMOUNT:
+                await asyncio.to_thread(mt5.close_position, p["ticket"])
+
         remaining = config.MAX_POSITIONS - len(pos)
         if remaining <= 0:
             return
