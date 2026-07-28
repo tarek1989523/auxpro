@@ -1,47 +1,119 @@
 import pandas as pd
 import ta
 import config
+import numpy as np
 
 
 class Strategy:
+    def _supertrend(self, df: pd.DataFrame, period: int = 10, multiplier: float = 3.0) -> pd.DataFrame:
+        df = df.copy()
+        hl2 = (df["high"] + df["low"]) / 2
+        atr = ta.volatility.average_true_range(df["high"], df["low"], df["close"], window=period)
+
+        up = hl2 - multiplier * atr
+        dn = hl2 + multiplier * atr
+
+        st = [0.0] * len(df)
+        direction = [1] * len(df)
+
+        for i in range(1, len(df)):
+            if df["close"].iloc[i] > dn.iloc[i - 1]:
+                direction[i] = 1
+            elif df["close"].iloc[i] < up.iloc[i - 1]:
+                direction[i] = -1
+            else:
+                direction[i] = direction[i - 1]
+
+            if direction[i] == 1:
+                st[i] = up.iloc[i]
+            else:
+                st[i] = dn.iloc[i]
+
+        df["st"] = st
+        df["st_dir"] = direction
+        return df
+
+    def _psar(self, df: pd.DataFrame) -> pd.DataFrame:
+        df = df.copy()
+        high = df["high"].values
+        low = df["low"].values
+        close = df["close"].values
+        n = len(df)
+
+        af = 0.02
+        af_step = 0.02
+        af_max = 0.2
+
+        psar = [0.0] * n
+        ep = low[0]
+        bull = True
+        psar[0] = high[0]
+
+        for i in range(1, n):
+            if bull:
+                psar[i] = psar[i - 1] + af * (ep - psar[i - 1])
+                psar[i] = min(psar[i], low[i - 1], low[i - 2] if i >= 2 else low[i - 1])
+
+                if low[i] < psar[i]:
+                    bull = False
+                    psar[i] = ep
+                    ep = low[i]
+                    af = af_step
+                else:
+                    if high[i] > ep:
+                        ep = high[i]
+                        af = min(af + af_step, af_max)
+            else:
+                psar[i] = psar[i - 1] + af * (ep - psar[i - 1])
+                psar[i] = max(psar[i], high[i - 1], high[i - 2] if i >= 2 else high[i - 1])
+
+                if high[i] > psar[i]:
+                    bull = True
+                    psar[i] = ep
+                    ep = high[i]
+                    af = af_step
+                else:
+                    if low[i] < ep:
+                        ep = low[i]
+                        af = min(af + af_step, af_max)
+
+            if bull:
+                direction = 1
+            else:
+                direction = -1
+
+        df["psar"] = psar
+        df["psar_dir"] = [1 if df["close"].iloc[i] > psar[i] else -1 for i in range(n)]
+        return df
+
     def _calc(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
 
-        df["ema8"] = ta.trend.ema_indicator(df["close"], window=8)
-        df["ema21"] = ta.trend.ema_indicator(df["close"], window=21)
+        df["ema5"] = ta.trend.ema_indicator(df["close"], window=5)
+        df["ema10"] = ta.trend.ema_indicator(df["close"], window=10)
+        df["ema20"] = ta.trend.ema_indicator(df["close"], window=20)
         df["ema50"] = ta.trend.ema_indicator(df["close"], window=50)
-        df["ema200"] = ta.trend.ema_indicator(df["close"], window=200)
-
-        df["rsi"] = ta.momentum.rsi(df["close"], window=14)
-        df["rsi_6"] = ta.momentum.rsi(df["close"], window=6)
 
         df["macd"] = ta.trend.macd_diff(df["close"])
         df["macd_signal"] = ta.trend.macd_signal(df["close"])
+        df["macd_hist"] = ta.trend.macd(df["close"]) - ta.trend.macd_signal(df["close"])
 
-        df["stoch_k"] = ta.momentum.stoch(df["high"], df["low"], df["close"], window=14, smooth_window=3)
-        df["stoch_d"] = ta.momentum.stoch_signal(df["high"], df["low"], df["close"], window=14, smooth_window=3)
+        df["rsi"] = ta.momentum.rsi(df["close"], window=14)
 
-        df["bb_upper"] = ta.volatility.bollinger_hband(df["close"], window=20, window_dev=2)
-        df["bb_lower"] = ta.volatility.bollinger_lband(df["close"], window=20, window_dev=2)
-        df["bb_mid"] = ta.volatility.bollinger_mavg(df["close"], window=20)
-        df["bb_width"] = (df["bb_upper"] - df["bb_lower"]) / df["bb_mid"]
-
-        df["atr"] = ta.volatility.average_true_range(df["high"], df["low"], df["close"], window=14)
-
-        df["adx"] = ta.trend.adx(df["high"], df["low"], df["close"], window=14)
-        df["di_plus"] = ta.trend.adx_pos(df["high"], df["low"], df["close"], window=14)
-        df["di_minus"] = ta.trend.adx_neg(df["high"], df["low"], df["close"], window=14)
+        df["atr"] = ta.volatility.average_true_range(df["high"], df["low"], df["close"], window=10)
+        df["atr_pips"] = df["atr"] * 10
 
         df["vol_avg"] = df["tick_volume"].rolling(window=20).mean()
         df["vol_ratio"] = df["tick_volume"] / df["vol_avg"].replace(0, 1)
 
-        df["atr_pips"] = df["atr"] * 10
+        df = self._supertrend(df, period=10, multiplier=3.0)
+        df = self._psar(df)
 
         return df
 
     def analyze(self, df: pd.DataFrame) -> dict:
         df = self._calc(df)
-        if len(df) < 205:
+        if len(df) < 55:
             return self._none()
 
         c = df.iloc[-1]
@@ -53,158 +125,113 @@ class Strategy:
         reasons_b = []
         reasons_s = []
 
-        # --- Trend (M15 context via EMAs) ---
-        above_ema50 = c["close"] > c["ema50"]
-        above_ema200 = c["close"] > c["ema200"]
-        below_ema50 = c["close"] < c["ema50"]
-        below_ema200 = c["close"] < c["ema200"]
-
-        if above_ema50:
-            buy_score += 1
-            reasons_b.append("Above EMA50")
-        if above_ema200:
-            buy_score += 1
-            reasons_b.append("Above EMA200")
-        if below_ema50:
-            sell_score += 1
-            reasons_s.append("Below EMA50")
-        if below_ema200:
-            sell_score += 1
-            reasons_s.append("Below EMA200")
-
-        # --- EMA Crossover (M5 signal) ---
-        cross_up = p["ema8"] <= p["ema21"] and c["ema8"] > c["ema21"]
-        cross_dn = p["ema8"] >= p["ema21"] and c["ema8"] < c["ema21"]
-        ema_bull = c["ema8"] > c["ema21"] and c["ema21"] > c["ema50"]
-        ema_bear = c["ema8"] < c["ema21"] and c["ema21"] < c["ema50"]
-
-        if cross_up:
+        # --- 1. SuperTrend ---
+        if c["st_dir"] == 1 and p["st_dir"] == -1:
             buy_score += 3
-            reasons_b.append("EMA Cross UP")
-        elif ema_bull:
+            reasons_b.append("ST Flip UP")
+        elif c["st_dir"] == 1:
             buy_score += 1
 
-        if cross_dn:
+        if c["st_dir"] == -1 and p["st_dir"] == 1:
             sell_score += 3
-            reasons_s.append("EMA Cross DN")
-        elif ema_bear:
+            reasons_s.append("ST Flip DN")
+        elif c["st_dir"] == -1:
             sell_score += 1
 
-        # --- MACD ---
+        # --- 2. Parabolic SAR ---
+        if c["psar_dir"] == 1 and p["psar_dir"] == -1:
+            buy_score += 3
+            reasons_b.append("PSAR Flip UP")
+        elif c["psar_dir"] == 1:
+            buy_score += 1
+
+        if c["psar_dir"] == -1 and p["psar_dir"] == 1:
+            sell_score += 3
+            reasons_s.append("PSAR Flip DN")
+        elif c["psar_dir"] == -1:
+            sell_score += 1
+
+        # --- 3. MACD ---
         macd_cross_up = p["macd"] <= p["macd_signal"] and c["macd"] > c["macd_signal"]
         macd_cross_dn = p["macd"] >= p["macd_signal"] and c["macd"] < c["macd_signal"]
-        macd_positive = c["macd"] > 0
-        macd_negative = c["macd"] < 0
+        hist_growing = abs(c["macd"]) > abs(p["macd"])
 
         if macd_cross_up:
-            buy_score += 2
+            buy_score += 3
             reasons_b.append("MACD Cross UP")
-        elif macd_positive:
+        elif c["macd"] > 0 and hist_growing:
             buy_score += 1
 
         if macd_cross_dn:
-            sell_score += 2
+            sell_score += 3
             reasons_s.append("MACD Cross DN")
-        elif macd_negative:
+        elif c["macd"] < 0 and hist_growing:
             sell_score += 1
 
-        # --- RSI ---
-        rsi_buy = c["rsi"] < 35 or (p["rsi"] < 40 and c["rsi"] > p["rsi"])
-        rsi_sell = c["rsi"] > 65 or (p["rsi"] > 60 and c["rsi"] < p["rsi"])
-        rsi_momentum_up = c["rsi"] > p["rsi"] > p2["rsi"]
-        rsi_momentum_dn = c["rsi"] < p["rsi"] < p2["rsi"]
+        # --- 4. EMA Trend ---
+        ema_bull = c["ema5"] > c["ema10"] > c["ema20"]
+        ema_bear = c["ema5"] < c["ema10"] < c["ema20"]
+        ema_cross_up = p["ema5"] <= p["ema10"] and c["ema5"] > c["ema10"]
+        ema_cross_dn = p["ema5"] >= p["ema10"] and c["ema5"] < c["ema10"]
 
-        if rsi_buy:
+        if ema_cross_up:
             buy_score += 2
-            reasons_b.append(f"RSI={c['rsi']:.0f}")
-        if rsi_momentum_up:
-            buy_score += 1
-
-        if rsi_sell:
-            sell_score += 2
-            reasons_s.append(f"RSI={c['rsi']:.0f}")
-        if rsi_momentum_dn:
-            sell_score += 1
-
-        # --- Stochastic ---
-        stoch_buy = c["stoch_k"] < 25 and c["stoch_k"] > c["stoch_d"]
-        stoch_sell = c["stoch_k"] > 75 and c["stoch_k"] < c["stoch_d"]
-        stoch_cross_up = p["stoch_k"] <= p["stoch_d"] and c["stoch_k"] > c["stoch_d"]
-        stoch_cross_dn = p["stoch_k"] >= p["stoch_d"] and c["stoch_k"] < c["stoch_d"]
-
-        if stoch_cross_up:
+            reasons_b.append("EMA Cross UP")
+        elif ema_bull:
             buy_score += 2
-            reasons_b.append("Stoch Cross UP")
-        elif stoch_buy:
-            buy_score += 1
+            reasons_b.append("EMA Aligned")
 
-        if stoch_cross_dn:
+        if ema_cross_dn:
             sell_score += 2
-            reasons_s.append("Stoch Cross DN")
-        elif stoch_sell:
-            sell_score += 1
-
-        # --- Bollinger Bands ---
-        bb_squeeze = c["bb_width"] < df["bb_width"].rolling(20).mean().iloc[-1]
-        bb_touch_lower = c["close"] <= c["bb_lower"] * 1.001
-        bb_touch_upper = c["close"] >= c["bb_upper"] * 0.999
-
-        if bb_touch_lower:
-            buy_score += 2
-            reasons_b.append("BB Lower Touch")
-        if bb_touch_upper:
+            reasons_s.append("EMA Cross DN")
+        elif ema_bear:
             sell_score += 2
-            reasons_s.append("BB Upper Touch")
+            reasons_s.append("EMA Aligned")
 
-        # --- ADX Trend Strength ---
-        adx_strong = c["adx"] > 20
-        di_bull = c["di_plus"] > c["di_minus"]
-        di_bear = c["di_minus"] > c["di_plus"]
-
-        if adx_strong and di_bull:
-            buy_score += 1
-            reasons_b.append(f"ADX={c['adx']:.0f}")
-        if adx_strong and di_bear:
-            sell_score += 1
-            reasons_s.append(f"ADX={c['adx']:.0f}")
-
-        # --- Volume ---
+        # --- 5. Volume ---
         vol_spike = c["vol_ratio"] > 1.5
         vol_ok = c["vol_ratio"] > config.VOLUME_THRESHOLD
 
         if vol_spike:
+            buy_score += 2
+            sell_score += 2
+            reasons_b.append(f"Vol Spike {c['vol_ratio']:.1f}x")
+            reasons_s.append(f"Vol Spike {c['vol_ratio']:.1f}x")
+        elif vol_ok:
             buy_score += 1
             sell_score += 1
-        if vol_ok:
+
+        # --- 6. RSI confirmation ---
+        if c["rsi"] < 40 and c["rsi"] > p["rsi"]:
             buy_score += 1
+            reasons_b.append(f"RSI={c['rsi']:.0f}")
+        if c["rsi"] > 60 and c["rsi"] < p["rsi"]:
             sell_score += 1
+            reasons_s.append(f"RSI={c['rsi']:.0f}")
 
         # --- Decision ---
         signal = "NONE"
         strength = 0
         reasons = []
 
-        min_score = 10
-
-        if buy_score >= min_score and buy_score > sell_score + 2:
+        if buy_score >= 8 and buy_score > sell_score + 2:
             signal = "BUY"
             strength = buy_score
             reasons = reasons_b
-        elif sell_score >= min_score and sell_score > buy_score + 2:
+        elif sell_score >= 8 and sell_score > buy_score + 2:
             signal = "SELL"
             strength = sell_score
             reasons = reasons_s
 
-        # --- Dynamic SL/TP ---
+        # --- Dynamic SL/TP (tight for scalping) ---
         atr = c["atr"]
         atr_pips = c["atr_pips"]
 
-        sl_pips = max(atr_pips * 1.5, config.STOP_LOSS_PIPS * 0.1)
-        tp_pips = max(atr_pips * 2.5, config.TAKE_PROFIT_PIPS * 0.1)
+        sl_pips = max(atr_pips * 1.0, 20)
+        tp_pips = max(atr_pips * 1.5, 30)
 
-        # Better risk:reward - at least 1:2
-        if tp_pips < sl_pips * 2:
-            tp_pips = sl_pips * 2
+        if tp_pips < sl_pips * 1.5:
+            tp_pips = sl_pips * 1.5
 
         sl_dist = sl_pips * 0.1
         tp_dist = tp_pips * 0.1
@@ -215,18 +242,15 @@ class Strategy:
             "reasons": reasons,
             "price": round(c["close"], 2),
             "rsi": round(c["rsi"], 2),
-            "rsi_6": round(c["rsi_6"], 2),
-            "stoch_k": round(c["stoch_k"], 2),
-            "stoch_d": round(c["stoch_d"], 2),
+            "macd": round(c["macd"], 4),
+            "macd_hist": round(c["macd_hist"], 4),
+            "st_dir": "UP" if c["st_dir"] == 1 else "DN",
+            "psar_dir": "UP" if c["psar_dir"] == 1 else "DN",
+            "ema5": round(c["ema5"], 2),
+            "ema10": round(c["ema10"], 2),
+            "ema20": round(c["ema20"], 2),
             "atr": round(atr, 4),
             "atr_pips": round(atr_pips, 2),
-            "ema8": round(c["ema8"], 2),
-            "ema21": round(c["ema21"], 2),
-            "ema50": round(c["ema50"], 2),
-            "ema200": round(c["ema200"], 2),
-            "macd": round(c["macd"], 4),
-            "adx": round(c["adx"], 2),
-            "bb_width": round(c["bb_width"], 6),
             "vol": round(c["vol_ratio"], 2),
             "sl_dist": round(sl_dist, 2),
             "tp_dist": round(tp_dist, 2),
@@ -239,11 +263,10 @@ class Strategy:
     def _none(self):
         return {
             "signal": "NONE", "strength": 0, "reasons": [],
-            "price": 0, "rsi": 0, "rsi_6": 0,
-            "stoch_k": 0, "stoch_d": 0,
-            "atr": 0, "atr_pips": 0,
-            "ema8": 0, "ema21": 0, "ema50": 0, "ema200": 0,
-            "macd": 0, "adx": 0, "bb_width": 0, "vol": 0,
+            "price": 0, "rsi": 0, "macd": 0, "macd_hist": 0,
+            "st_dir": "-", "psar_dir": "-",
+            "ema5": 0, "ema10": 0, "ema20": 0,
+            "atr": 0, "atr_pips": 0, "vol": 0,
             "sl_dist": 0, "tp_dist": 0, "sl_pips": 0, "tp_pips": 0,
             "buy_score": 0, "sell_score": 0,
         }
