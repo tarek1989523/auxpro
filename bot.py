@@ -404,7 +404,32 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         sl = price - analysis["sl_dist"] if signal == "BUY" else price + analysis["sl_dist"]
         tp = price + analysis["tp_dist"] if signal == "BUY" else price - analysis["tp_dist"]
 
-        open_count = min(config.TRADES_PER_SIGNAL, remaining)
+        same_dir = [p for p in pos if p["type"] == signal]
+        diff_dir = [p for p in pos if p["type"] != signal]
+        same_count = len(same_dir)
+
+        if same_count == 0:
+            open_count = min(3, remaining)
+        elif same_count < 5:
+            if signal == "BUY":
+                dip = price < df["ema5"].iloc[-1]
+            else:
+                dip = price > df["ema5"].iloc[-1]
+            if not dip:
+                return
+            open_count = min(2, remaining)
+        else:
+            if signal == "BUY":
+                dip = price < df["ema10"].iloc[-1]
+            else:
+                dip = price > df["ema10"].iloc[-1]
+            if not dip:
+                return
+            open_count = min(1, remaining)
+
+        if open_count <= 0:
+            return
+
         opened = []
         failed = 0
 
