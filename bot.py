@@ -371,12 +371,6 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             logger.info(f"Daily limit reached: {daily}/{config.MAX_DAILY_TRADES}")
             return
 
-        stats = db.get_stats()
-        daily_pnl = stats.get("daily_pnl", 0)
-        if daily_pnl <= -config.MAX_DAILY_LOSS_USD:
-            logger.info(f"Daily loss limit reached: {daily_pnl:.2f}$")
-            return
-
         events = await asyncio.to_thread(fetch_forex_factory)
         if is_high_impact_now(events):
             logger.info("Skipping - high impact news")
@@ -415,16 +409,13 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         same_count = len(same_dir)
 
         if same_count == 0:
-            if analysis["strength"] >= 16:
-                open_count = min(2, remaining)
-            else:
-                open_count = 1
-        elif same_count < 3:
-            open_count = 1
-        elif same_count < 6:
-            open_count = 1
+            open_count = min(5, remaining)
+        elif same_count < 10:
+            open_count = min(3, remaining)
+        elif same_count < 20:
+            open_count = min(2, remaining)
         else:
-            open_count = 0
+            open_count = min(1, remaining)
 
         if open_count <= 0:
             return
