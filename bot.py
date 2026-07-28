@@ -27,6 +27,7 @@ LANG = {
     "ar": {
         "start": "── ═══════════════ ──\n      نظام التداول الذهبية\n── ═══════════════ ──\n\nاختر من القائمة:",
         "account": "الحساب التجريبي",
+        "real_account": "الحساب الحقيقي",
         "trade": "ابدأ التداول",
         "stop": "أوقف التداول",
         "positions": "الصفقات المفتوحة",
@@ -36,6 +37,7 @@ LANG = {
         "help": "المساعدة",
         "back": "العودة",
         "admin": "لوحة التحكم",
+        "news": "الأخبار",
         "lang_btn": "English",
         "trading_on": "التداول يعمل الآن",
         "trading_off": "تم إيقاف التداول",
@@ -44,10 +46,69 @@ LANG = {
         "connected": "تم الاتصال بالحساب التجريبي",
         "failed": "فشل الاتصال بالـ MT5",
         "report": "التقرير اليومي",
+        "login": "رقم الحساب",
+        "server": "السيرفر",
+        "balance": "الرصيد",
+        "equity": "الحقوق",
+        "profit": "الربح",
+        "status": "الحالة",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "no_data": "لا توجد بيانات",
+        "signal": "الإشارة",
+        "score": "النتيجة",
+        "at_peak": "قمة/قاع",
+        "price": "السعر",
+        "timeframes": "الإطارات الزمنية",
+        "total_trades": "إجمالي الصفقات",
+        "wins": "الأرباح",
+        "losses": "الخسائر",
+        "win_rate": "نسبة النجاح",
+        "denied": "ممنوع",
+        "users": "المستخدمين",
+        "news_title": "أخبار الذهب والتحليل",
+        "safe_to_trade": "آمن للتداول",
+        "stop_trading": "أوقف التداول",
+        "market": "السوق",
+        "bullish": "صاعد",
+        "bearish": "هابط",
+        "economic_calendar": "التقويم الاقتصادي",
+        "copied_to_real": "✅ تم النسخ للحساب الحقيقي",
+        "real_connected": "موصل ✅",
+        "real_copying": "يتم نسخ الصفقات تلقائياً",
+        "real_no_account": "ليس لديك حساب متصل.",
+        "real_send_format": "أرسل بيانات حسابك بهذا التنسيق:",
+        "real_format": "الرقم|كلمة السر|اسم السيرفر",
+        "real_example": "مثال:",
+        "real_disconnected": "تم فصل الحساب الحقيقي ✅",
+        "real_disconnect_btn": "فصل الحساب",
+        "real_error_digits": "❌ خطأ: رقم الحساب يجب أن يكون أرقام فقط",
+        "real_saved": "✅ تم حفظ بيانات الحساب الحقيقي",
+        "real_will_copy": "سيتم نسخ الصفقات تلقائياً عند فتحها.",
+        "real_wrong_format": "❌ تنسيق غير صحيح",
+        "account_info": "معلومات الحساب",
+        "analysis": "التحليل الفني",
+        "peak_yes": "نعم - تجنب",
+        "peak_no": "لا",
+        "symbol": "الرمز",
+        "lot": "العقد",
+        "max_positions": "الحد الأقصى للصفقات",
+        "scan_interval": "وقت المسح",
+        "indicators": "المؤشرات",
+        "trailing_stop": "وقف متحرك",
+        "min_score": "الحد الأدنى للنتيجة",
+        "help_trade": "1. اختر \"ابدأ التداول\"",
+        "help_scan": "2. البوت يمسح السوق كل",
+        "help_auto": "3. يفتح صفقات XAUUSD تلقائياً",
+        "help_sltp": "4. الوقف/الهدف يغلق الصفقات تلقائياً",
+        "help_check": "5. تحقق من النتائج لمعرفة الأداء",
+        "seconds": "ثانية",
+        "trades": "صفقات",
     },
     "en": {
         "start": "── ═══════════════ ──\n    Gold Trading System\n── ═══════════════ ──\n\nChoose from menu:",
         "account": "Demo Account",
+        "real_account": "Real Account",
         "trade": "Start Trading",
         "stop": "Stop Trading",
         "positions": "Open Positions",
@@ -57,6 +118,7 @@ LANG = {
         "help": "Help",
         "back": "Back",
         "admin": "Admin Panel",
+        "news": "News",
         "lang_btn": "عربي",
         "trading_on": "Trading active",
         "trading_off": "Trading stopped",
@@ -65,6 +127,64 @@ LANG = {
         "connected": "Connected to demo account",
         "failed": "MT5 connection failed",
         "report": "Daily Report",
+        "login": "Login",
+        "server": "Server",
+        "balance": "Balance",
+        "equity": "Equity",
+        "profit": "Profit",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "no_data": "No data",
+        "signal": "Signal",
+        "score": "Score",
+        "at_peak": "At Peak",
+        "price": "Price",
+        "timeframes": "Timeframes",
+        "total_trades": "Total Trades",
+        "wins": "Wins",
+        "losses": "Losses",
+        "win_rate": "Win Rate",
+        "denied": "Denied",
+        "users": "Users",
+        "news_title": "Gold News & Analysis",
+        "safe_to_trade": "Safe to trade",
+        "stop_trading": "STOP TRADING",
+        "market": "Market",
+        "bullish": "Bullish",
+        "bearish": "Bearish",
+        "economic_calendar": "Economic Calendar",
+        "copied_to_real": "✅ Copied to Real Account",
+        "real_connected": "Connected ✅",
+        "real_copying": "Trades are copied automatically",
+        "real_no_account": "You don't have a connected account.",
+        "real_send_format": "Send your account details in this format:",
+        "real_format": "login|password|server",
+        "real_example": "Example:",
+        "real_disconnected": "Real account disconnected ✅",
+        "real_disconnect_btn": "Disconnect",
+        "real_error_digits": "❌ Error: Login must contain only numbers",
+        "real_saved": "✅ Real account saved",
+        "real_will_copy": "Trades will be copied automatically when opened.",
+        "real_wrong_format": "❌ Invalid format",
+        "account_info": "Account Info",
+        "analysis": "Technical Analysis",
+        "peak_yes": "YES - Avoid",
+        "peak_no": "NO",
+        "symbol": "Symbol",
+        "lot": "Lot",
+        "max_positions": "Max Positions",
+        "scan_interval": "Scan Interval",
+        "indicators": "Indicators",
+        "trailing_stop": "Trailing Stop",
+        "min_score": "Min Score",
+        "help_trade": "1. Choose \"Start Trading\"",
+        "help_scan": "2. Bot scans market every",
+        "help_auto": "3. Opens XAUUSD trades automatically",
+        "help_sltp": "4. SL/TP close trades automatically",
+        "help_check": "5. Check Results for performance",
+        "seconds": "sec",
+        "trades": "Trades",
     },
 }
 
@@ -83,17 +203,14 @@ def kb(uid: int, rows: list) -> InlineKeyboardMarkup:
 
 
 def main_menu(uid: int) -> InlineKeyboardMarkup:
-    lang = db.get_lang(uid)
     btns = [
         [InlineKeyboardButton(L(uid, "account"), callback_data="acct"),
-         InlineKeyboardButton("الحساب الحقيقي", callback_data="real_acct")],
-        [InlineKeyboardButton(L(uid, "trade"), callback_data="start_trade"),
-         InlineKeyboardButton(L(uid, "stop"), callback_data="stop_trade")],
+         InlineKeyboardButton(L(uid, "real_account"), callback_data="real_acct")],
         [InlineKeyboardButton(L(uid, "trade"), callback_data="start_trade"),
          InlineKeyboardButton(L(uid, "stop"), callback_data="stop_trade")],
         [InlineKeyboardButton(L(uid, "positions"), callback_data="positions"),
          InlineKeyboardButton(L(uid, "analyze"), callback_data="analyze")],
-        [InlineKeyboardButton("News", callback_data="news"),
+        [InlineKeyboardButton(L(uid, "news"), callback_data="news"),
          InlineKeyboardButton(L(uid, "results"), callback_data="results")],
         [InlineKeyboardButton(L(uid, "settings"), callback_data="settings"),
          InlineKeyboardButton(L(uid, "help"), callback_data="help")],
@@ -152,12 +269,12 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
                 f"{'─'*30}\n"
                 f"  {L(uid, 'account')}\n"
                 f"{'─'*30}\n\n"
-                f"Login: {info['login']}\n"
-                f"Server: {info['server']}\n"
-                f"Balance: {info['balance']:.2f}$\n"
-                f"Equity: {info['equity']:.2f}$\n"
-                f"Profit: {info['profit']:.2f}$\n\n"
-                f"Status: {'Active' if trading_active.get(uid) else 'Inactive'}"
+                f"{L(uid, 'login')}: {info['login']}\n"
+                f"{L(uid, 'server')}: {info['server']}\n"
+                f"{L(uid, 'balance')}: {info['balance']:.2f}$\n"
+                f"{L(uid, 'equity')}: {info['equity']:.2f}$\n"
+                f"{L(uid, 'profit')}: {info['profit']:.2f}$\n\n"
+                f"{L(uid, 'status')}: {L(uid, 'active') if trading_active.get(uid) else L(uid, 'inactive')}"
             )
         else:
             txt = L(uid, "failed")
@@ -170,25 +287,25 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         if ra:
             txt = (
                 f"{'─'*30}\n"
-                f"  الحساب الحقيقي\n"
+                f"  {L(uid, 'real_account')}\n"
                 f"{'─'*30}\n\n"
-                f"Login: {ra['login']}\n"
-                f"Server: {ra['server']}\n"
-                f"Connected ✅\n\n"
-                f"يتم نسخ الصفقات تلقائياً"
+                f"{L(uid, 'login')}: {ra['login']}\n"
+                f"{L(uid, 'server')}: {ra['server']}\n"
+                f"{L(uid, 'real_connected')}\n\n"
+                f"{L(uid, 'real_copying')}"
             )
-            btns = [[InlineKeyboardButton("فصل الحساب", callback_data="real_disconnect"),
+            btns = [[InlineKeyboardButton(L(uid, "real_disconnect_btn"), callback_data="real_disconnect"),
                      InlineKeyboardButton(L(uid, "back"), callback_data="back")]]
         else:
             txt = (
                 f"{'─'*30}\n"
-                f"  الحساب الحقيقي\n"
+                f"  {L(uid, 'real_account')}\n"
                 f"{'─'*30}\n\n"
-                f"ليس لديك حساب متصل.\n\n"
-                f"أرسل بيانات حسابك بهذا التنسيق:\n"
-                f"الرقم|كلمة السر|اسم السيرفر\n\n"
-                f"مثال:\n"
-                f"12345678|MyPassword|MetaQuotes-Demo"
+                f"{L(uid, 'real_no_account')}\n\n"
+                f"{L(uid, 'real_send_format')}\n"
+                f"`{L(uid, 'real_format')}`\n\n"
+                f"{L(uid, 'real_example')}:\n"
+                f"`12345678|MyPassword|MetaQuotes-Demo`"
             )
             btns = [[InlineKeyboardButton(L(uid, "back"), callback_data="back")]]
         await q.answer()
@@ -197,7 +314,7 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
     if d == "real_disconnect":
         await asyncio.to_thread(db.deactivate_real_account, uid)
-        await q.answer("تم فصل الحساب الحقيقي ✅", show_alert=True)
+        await q.answer(L(uid, "real_disconnected"), show_alert=True)
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
@@ -220,12 +337,12 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
                 f"{'─'*30}\n"
                 f"  {L(uid, 'connected')}\n"
                 f"{'─'*30}\n\n"
-                f"Account: {info['login']}\n"
-                f"Balance: {bal}\n"
-                f"Scan: {config.SCAN_INTERVAL_SECONDS}s\n\n"
-                f"Market: {analysis['signal']}\n"
-                f"Buy: {analysis.get('buy_score', 0)} | Sell: {analysis.get('sell_score', 0)}\n"
-                f"Status: Trading ACTIVE"
+                f"{L(uid, 'login')}: {info['login']}\n"
+                f"{L(uid, 'balance')}: {bal}\n"
+                f"{L(uid, 'scan_interval')}: {config.SCAN_INTERVAL_SECONDS}s\n\n"
+                f"{L(uid, 'signal')}: {analysis['signal']}\n"
+                f"{L(uid, 'wins')}: {analysis.get('buy_score', 0)} | {L(uid, 'losses')}: {analysis.get('sell_score', 0)}\n"
+                f"{L(uid, 'status')}: {L(uid, 'trading_on')}"
             )
         else:
             txt = L(uid, "failed")
@@ -264,30 +381,30 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
             if df is not None:
                 a = strategy.analyze(df, df5, df15)
-                peak = "YES - SKIP" if a.get("at_peak") else "NO"
+                peak = L(uid, "peak_yes") if a.get("at_peak") else L(uid, "peak_no")
                 txt = (
-                    f"{'─'*30}\n  {L(uid, 'analyze')}\n{'─'*30}\n\n"
-                    f"Signal: {a['signal']}\n"
-                    f"Score: {a['strength']}\n"
-                    f"Buy: {a['buy_score']} | Sell: {a['sell_score']}\n"
-                    f"At Peak: {peak}\n"
+                    f"{'─'*30}\n  {L(uid, 'analysis')}\n{'─'*30}\n\n"
+                    f"{L(uid, 'signal')}: {a['signal']}\n"
+                    f"{L(uid, 'score')}: {a['strength']}\n"
+                    f"{L(uid, 'wins')}: {a['buy_score']} | {L(uid, 'losses')}: {a['sell_score']}\n"
+                    f"{L(uid, 'at_peak')}: {peak}\n"
                     f"{'─'*30}\n"
-                    f"Price: {a['price']}\n"
+                    f"{L(uid, 'price')}: {a['price']}\n"
                     f"SuperTrend: {a['st_dir']}\n"
                     f"PSAR: {a['psar_dir']}\n"
                     f"MACD: {a['macd']}\n"
                     f"RSI: {a['rsi']}\n"
-                    f"EMA: {a['ema5']}/{a['ema10']}/{a['ema20']}\n"
+                    f"EMA 5/10/20: {a['ema5']}/{a['ema10']}/{a['ema20']}\n"
                     f"ATR: {a['atr_pips']:.1f} pips\n"
                     f"Volume: {a['vol']}x\n\n"
                     f"SL: {a['sl_pips']:.1f} pips\n"
                     f"TP: {a['tp_pips']:.1f} pips\n"
-                    f"Timeframes: M1+M5+M15"
+                    f"{L(uid, 'timeframes')}: M1+M5+M15"
                 )
                 if a["reasons"]:
                     txt += f"\n\n{', '.join(a['reasons'])}"
             else:
-                txt = "No data"
+                txt = L(uid, "no_data")
         else:
             txt = L(uid, "failed")
         await q.edit_message_text(txt, reply_markup=main_menu(uid))
@@ -302,9 +419,9 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         wr = (wins / trades * 100) if trades > 0 else 0
         txt = (
             f"{'─'*30}\n  {L(uid, 'results')}\n{'─'*30}\n\n"
-            f"Total Trades: {trades}\n"
-            f"Wins: {wins} | Losses: {losses}\n"
-            f"Win Rate: {wr:.1f}%\n\n"
+            f"{L(uid, 'total_trades')}: {trades}\n"
+            f"{L(uid, 'wins')}: {wins} | {L(uid, 'losses')}: {losses}\n"
+            f"{L(uid, 'win_rate')}: {wr:.1f}%\n\n"
             f"P/L: {pnl:+.2f}$"
         )
         await q.answer()
@@ -314,23 +431,22 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     if d == "settings":
         txt = (
             f"{'─'*30}\n  {L(uid, 'settings')}\n{'─'*30}\n\n"
-            f"Symbol: {config.SYMBOL}\n"
-            f"Timeframe: {config.TIMEFRAME}\n"
-            f"Lot: {config.LOT_SIZE}\n"
-            f"Max Positions: {config.MAX_POSITIONS}\n"
-            f"Scan: {config.SCAN_INTERVAL_SECONDS}s\n\n"
-            f"Indicators:\n"
+            f"{L(uid, 'symbol')}: {config.SYMBOL}\n"
+            f"{L(uid, 'timeframes')}: {config.TIMEFRAME}\n"
+            f"{L(uid, 'lot')}: {config.LOT_SIZE}\n"
+            f"{L(uid, 'max_positions')}: {config.MAX_POSITIONS}\n"
+            f"{L(uid, 'scan_interval')}: {config.SCAN_INTERVAL_SECONDS}s\n\n"
+            f"{L(uid, 'indicators')}:\n"
             f"  SuperTrend (10, 3.0)\n"
             f"  Parabolic SAR\n"
             f"  MACD\n"
             f"  EMA 5/10/20\n"
             f"  RSI 14\n"
             f"  Volume\n"
-            f"  ATR (dynamic SL/TP)\n\n"
-            f"Timeframes: M1 + M5 + M15\n"
-            f"Peak Detection: ON\n"
-            f"Trailing Stop: ON\n"
-            f"Min Score: {config.MIN_BUY_SCORE}"
+            f"  ATR (dynamic)\n\n"
+            f"{L(uid, 'timeframes')}: M1 + M5 + M15\n"
+            f"{L(uid, 'trailing_stop')}: ON\n"
+            f"{L(uid, 'min_score')}: {config.MIN_BUY_SCORE}"
         )
         await q.answer()
         await q.edit_message_text(txt, reply_markup=kb(uid, [[InlineKeyboardButton(L(uid, "back"), callback_data="back")]]))
@@ -339,11 +455,11 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     if d == "help":
         txt = (
             f"{'─'*30}\n  {L(uid, 'help')}\n{'─'*30}\n\n"
-            f"1. {L(uid, 'trade')}\n"
-            f"2. Bot scans market every {config.SCAN_INTERVAL_SECONDS}s\n"
-            f"3. Opens XAUUSD trades automatically\n"
-            f"4. SL/TP close trades automatically\n"
-            f"5. Check {L(uid, 'results')} for performance"
+            f"{L(uid, 'help_trade')}\n"
+            f"{L(uid, 'help_scan')} {config.SCAN_INTERVAL_SECONDS} {L(uid, 'seconds')}\n"
+            f"{L(uid, 'help_auto')}\n"
+            f"{L(uid, 'help_sltp')}\n"
+            f"{L(uid, 'help_check')}"
         )
         await q.answer()
         await q.edit_message_text(txt, reply_markup=kb(uid, [[InlineKeyboardButton(L(uid, "back"), callback_data="back")]]))
@@ -351,14 +467,14 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
     if d == "admin":
         if not is_admin(uid):
-            await q.answer("Denied", show_alert=True)
+            await q.answer(L(uid, "denied"), show_alert=True)
             return
         total = db.get_total_users()
         s = db.get_stats()
         txt = (
             f"{'─'*30}\n  {L(uid, 'admin')}\n{'─'*30}\n\n"
-            f"Users: {total}\n"
-            f"Trades: {s.get('total_trades', 0)}\n"
+            f"{L(uid, 'users')}: {total}\n"
+            f"{L(uid, 'trades')}: {s.get('total_trades', 0)}\n"
             f"P/L: {s.get('total_pnl', 0):+.2f}$"
         )
         await q.answer()
@@ -371,21 +487,21 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         now_trading = is_high_impact_now(events)
         news = await asyncio.to_thread(fetch_gold_news)
         sentiment = get_market_sentiment(news)
-        status = "STOP TRADING" if now_trading else "Safe to trade"
+        status = L(uid, "stop_trading") if now_trading else L(uid, "safe_to_trade")
 
         txt = (
-            f"{'─'*30}\n  Gold News & Analysis\n{'─'*30}\n\n"
-            f"Status: {status}\n"
-            f"Market: {sentiment['emoji']} {sentiment['label']}\n"
-            f"Bullish: {sentiment.get('bull', 0)} | Bearish: {sentiment.get('bear', 0)}\n\n"
+            f"{'─'*30}\n  {L(uid, 'news_title')}\n{'─'*30}\n\n"
+            f"{L(uid, 'status')}: {status}\n"
+            f"{L(uid, 'market')}: {sentiment['emoji']} {sentiment['label']}\n"
+            f"{L(uid, 'bullish')}: {sentiment.get('bull', 0)} | {L(uid, 'bearish')}: {sentiment.get('bear', 0)}\n\n"
         )
 
         for i, n in enumerate(news[:5], 1):
             s = n["sentiment"]
-            txt += f"{s['emoji']} {n['title'][:60]}\n   Source: {n['source']}\n\n"
+            txt += f"{s['emoji']} {n['title'][:60]}\n   {n['source']}\n\n"
 
         if events:
-            txt += f"{'─'*30}\n  Economic Calendar\n{'─'*30}\n\n"
+            txt += f"{'─'*30}\n  {L(uid, 'economic_calendar')}\n{'─'*30}\n\n"
             for e in events[:3]:
                 txt += f"  {e['country']} | {e['title']}\n"
 
@@ -404,25 +520,25 @@ async def handle_text(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         login_str = login_str.strip()
         if not login_str.isdigit():
             await update.message.reply_text(
-                "❌ خطأ: رقم الحساب يجب أن يكون أرقام فقط\n\n"
-                "أرسل البيانات بهذا التنسيق:\n"
-                "`الرقم|كلمة السر|اسم السيرفر`"
+                f"{L(uid, 'real_error_digits')}\n\n"
+                f"{L(uid, 'real_send_format')}:\n"
+                f"`{L(uid, 'real_format')}`"
             )
             return
         login = int(login_str)
         await asyncio.to_thread(db.save_real_account, uid, login, password, server)
         await update.message.reply_text(
-            f"✅ تم حفظ بيانات الحساب الحقيقي\n\n"
-            f"Login: {login}\n"
-            f"Server: {server}\n\n"
-            "سيتم نسخ الصفقات تلقائياً عند فتحها."
+            f"{L(uid, 'real_saved')}\n\n"
+            f"{L(uid, 'login')}: {login}\n"
+            f"{L(uid, 'server')}: {server}\n\n"
+            f"{L(uid, 'real_will_copy')}"
         )
     else:
         await update.message.reply_text(
-            "❌ تنسيق غير صحيح\n\n"
-            "أرسل البيانات بهذا التنسيق:\n"
-            "`الرقم|كلمة السر|اسم السيرفر`\n\n"
-            "مثال:\n"
+            f"{L(uid, 'real_wrong_format')}\n\n"
+            f"{L(uid, 'real_send_format')}:\n"
+            f"`{L(uid, 'real_format')}`\n\n"
+            f"{L(uid, 'real_example')}:\n"
             "`12345678|MyPassword|MetaQuotes-Demo`"
         )
 
@@ -523,22 +639,21 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             emoji = "🟢" if signal == "BUY" else "🔴"
             reasons_str = ", ".join(analysis["reasons"]) if analysis["reasons"] else "-"
             txt = (
-                f"{emoji} {len(opened)}x {signal} Trades Opened\n"
+                f"{emoji} {len(opened)}x {signal}\n"
                 f"{'─'*30}\n\n"
-                f"Price: {price}\n"
-                f"Lot each: {config.LOT_SIZE}\n"
-                f"Total lot: {config.LOT_SIZE * len(opened)}\n"
+                f"{L(0, 'price')}: {price}\n"
+                f"{L(0, 'lot')}: {config.LOT_SIZE}\n"
                 f"SL: {sl:.2f} ({analysis['sl_pips']:.1f} pips)\n"
                 f"TP: {tp:.2f} ({analysis['tp_pips']:.1f} pips)\n\n"
-                f"Score: {analysis['strength']}/12\n"
+                f"{L(0, 'score')}: {analysis['strength']}/12\n"
                 f"SuperTrend: {analysis['st_dir']}\n"
                 f"RSI: {analysis['rsi']}\n"
                 f"Volume: {analysis['vol']}x\n\n"
                 f"Reasons: {reasons_str}\n"
-                f"Opened: {len(opened)} | Failed: {failed}"
+                f"{L(uid, 'wins')}: {len(opened)} | {L(uid, 'losses')}: {failed}"
             )
             if copied:
-                txt += "\n\n✅ Copied to Real Account"
+                txt += f"\n\n{L(uid, 'copied_to_real')}"
             await notify_admin(txt)
             logger.info(f"Opened {len(opened)}x {signal} trades")
 
