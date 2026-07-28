@@ -164,3 +164,71 @@ def open_order(order_type: str, lot: float, sl: float, tp: float) -> Optional[di
             return None
         logger.info(f"Order: {order_type} @ {res.price}")
         return {"ticket": res.order, "price": res.price, "volume": lot}
+
+
+def modify_sl(ticket: int, new_sl: float) -> bool:
+    with _lock:
+        pos = mt5.positions_get(ticket=ticket)
+        if not pos:
+            return False
+        p = pos[0]
+        si = mt5.symbol_info(config.SYMBOL)
+        if si is None:
+            return False
+        new_sl = round(new_sl, si.digits)
+        req = {
+            "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
+            "position": ticket, "sl": new_sl, "tp": p.tp,
+        }
+        res = mt5.order_send(req)
+        if res and res.retcode == mt5.TRADE_RETCODE_DONE:
+            logger.info(f"SL modified: {ticket} -> {new_sl}")
+            return True
+        logger.error(f"SL modify failed: {res}")
+        return False
+
+
+def trailing_stop():
+    if not config.TRAILING_STOP_ENABLED:
+        return
+
+    with _lock:
+        positions = mt5.positions_get(symbol=config.SYMBOL)
+        if not positions:
+            return
+
+        si = mt5.symbol_info(config.SYMBOL)
+        if si is None:
+            return
+
+        for p in positions:
+            open_price = p.price_open
+            current = p.price_current
+            current_sl = p.sl
+            digits = si.digits
+            point = si.point
+
+            trail_start = config.TRAILING_START_PIPS * point * 10
+            trail_dist = config.TRAILING_DISTANCE_PIPS * point * 10
+
+            if p.type == mt5.ORDER_TYPE_BUY:
+                profit_pips = (current - open_price) / (point * 10)
+                if profit_pips >= config.TRAILING_START_PIPS:
+                    new_sl = current - trail_dist
+                    if current_sl == 0 or new_sl > current_sl + (config.TRAILING_STEP_PIPS * point * 10):
+                        mt5.order_send({
+                            "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
+                            "position": p.ticket, "sl": round(new_sl, digits), "tp": p.tp,
+                        })
+                        logger.info(f"Trailing BUY {p.ticket}: SL -> {new_sl:.2f} (profit {profit_pips:.0f} pips)")
+
+            elif p.type == mt5.ORDER_TYPE_SELL:
+                profit_pips = (open_price - current) / (point * 10)
+                if profit_pips >= config.TRAILING_START_PIPS:
+                    new_sl = current + trail_dist
+                    if current_sl == 0 or new_sl < current_sl - (config.TRAILING_STEP_PIPS * point * 10):
+                        mt5.order_send({
+                            "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
+                            "position": p.ticket, "sl": round(new_sl, digits), "tp": p.tp,
+                        })
+                        logger.info(f"Trailing SELL {p.ticket}: SL -> {new_sl:.2f} (profit {profit_pips:.0f} pips)")

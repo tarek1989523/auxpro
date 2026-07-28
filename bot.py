@@ -353,6 +353,8 @@ async def notify_admin(text: str):
 
 async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
     try:
+        await asyncio.to_thread(mt5.trailing_stop)
+
         daily = db.get_daily_trades()
         if daily >= config.MAX_DAILY_TRADES:
             logger.info(f"Daily limit reached: {daily}/{config.MAX_DAILY_TRADES}")
