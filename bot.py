@@ -394,27 +394,24 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         if sig not in ("BUY", "SELL"):
             return
 
+        # REVERSE: strategy BUY -> open SELL, strategy SELL -> open BUY
+        signal = "SELL" if sig == "BUY" else "BUY"
+        logger.info(f"Reverse: {sig} -> {signal}")
+
         pos = await asyncio.to_thread(mt5.get_positions)
         remaining = config.MAX_POSITIONS - len(pos)
         if remaining <= 0:
             return
 
-        signal = analysis["signal"]
         price = analysis["price"]
         sl = price - analysis["sl_dist"] if signal == "BUY" else price + analysis["sl_dist"]
         tp = price + analysis["tp_dist"] if signal == "BUY" else price - analysis["tp_dist"]
 
         same_dir = [p for p in pos if p["type"] == signal]
         same_count = len(same_dir)
-
-        if same_count == 0:
-            open_count = min(5, remaining)
-        elif same_count < 10:
-            open_count = min(3, remaining)
-        elif same_count < 20:
-            open_count = min(2, remaining)
-        else:
-            open_count = min(1, remaining)
+        open_count = min(config.TRADES_PER_SIGNAL - same_count, remaining)
+        if same_count >= config.TRADES_PER_SIGNAL:
+            open_count = 0
 
         if open_count <= 0:
             return
