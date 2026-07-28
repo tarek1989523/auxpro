@@ -154,7 +154,6 @@ def open_order(order_type: str, lot: float, sl: float, tp: float) -> Optional[di
         req = {
             "action": mt5.TRADE_ACTION_DEAL, "symbol": config.SYMBOL,
             "volume": lot, "type": mt5_type, "price": price,
-            "sl": round(sl, si.digits), "tp": round(tp, si.digits),
             "deviation": config.SLIPPAGE, "magic": config.MAGIC_NUMBER,
             "type_time": mt5.ORDER_TIME_GTC, "type_filling": filling,
         }
@@ -162,8 +161,23 @@ def open_order(order_type: str, lot: float, sl: float, tp: float) -> Optional[di
         if res is None or res.retcode != mt5.TRADE_RETCODE_DONE:
             logger.error(f"Order failed: {res}")
             return None
-        logger.info(f"Order: {order_type} @ {res.price}")
-        return {"ticket": res.order, "price": res.price, "volume": lot}
+
+        ticket = res.order
+        exec_price = res.price
+
+        sl = round(sl, si.digits)
+        tp = round(tp, si.digits)
+        modify_req = {
+            "action": mt5.TRADE_ACTION_SLTP, "symbol": config.SYMBOL,
+            "position": ticket, "sl": sl, "tp": tp,
+        }
+        modify_res = mt5.order_send(modify_req)
+        if modify_res and modify_res.retcode == mt5.TRADE_RETCODE_DONE:
+            logger.info(f"Order: {order_type} #{ticket} @ {exec_price}")
+            return {"ticket": ticket, "price": exec_price, "volume": lot}
+        else:
+            logger.warning(f"SL/TP modify failed for #{ticket}: {modify_res}. Order open without stops.")
+            return {"ticket": ticket, "price": exec_price, "volume": lot}
 
 
 def modify_sl(ticket: int, new_sl: float) -> bool:
