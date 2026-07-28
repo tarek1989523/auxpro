@@ -167,7 +167,9 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             bal = f"{info['balance']:.2f}$" if info else "?"
 
             df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
-            analysis = strategy.analyze(df) if df is not None else {"signal": "NONE"}
+            df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
+            df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
+            analysis = strategy.analyze(df, df5, df15) if df is not None else {"signal": "NONE"}
 
             txt = (
                 f"{'─'*30}\n"
@@ -213,13 +215,17 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
         if connected:
             df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
+            df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
+            df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
             if df is not None:
-                a = strategy.analyze(df)
+                a = strategy.analyze(df, df5, df15)
+                peak = "YES - SKIP" if a.get("at_peak") else "NO"
                 txt = (
                     f"{'─'*30}\n  {L(uid, 'analyze')}\n{'─'*30}\n\n"
                     f"Signal: {a['signal']}\n"
-                    f"Score: {a['strength']}/12\n"
+                    f"Score: {a['strength']}\n"
                     f"Buy: {a['buy_score']} | Sell: {a['sell_score']}\n"
+                    f"At Peak: {peak}\n"
                     f"{'─'*30}\n"
                     f"Price: {a['price']}\n"
                     f"SuperTrend: {a['st_dir']}\n"
@@ -231,9 +237,10 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
                     f"Volume: {a['vol']}x\n\n"
                     f"SL: {a['sl_pips']:.1f} pips\n"
                     f"TP: {a['tp_pips']:.1f} pips\n"
+                    f"Timeframes: M1+M5+M15"
                 )
                 if a["reasons"]:
-                    txt += f"\nReasons: {', '.join(a['reasons'])}"
+                    txt += f"\n\n{', '.join(a['reasons'])}"
             else:
                 txt = "No data"
         else:
@@ -275,7 +282,10 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             f"  RSI 14\n"
             f"  Volume\n"
             f"  ATR (dynamic SL/TP)\n\n"
-            f"Min Score: {config.MIN_BUY_SCORE}/12"
+            f"Timeframes: M1 + M5 + M15\n"
+            f"Peak Detection: ON\n"
+            f"Trailing Stop: ON\n"
+            f"Min Score: {config.MIN_BUY_SCORE}"
         )
         await q.answer()
         await q.edit_message_text(txt, reply_markup=kb(uid, [[InlineKeyboardButton(L(uid, "back"), callback_data="back")]]))
@@ -371,11 +381,13 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             return
 
         df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
+        df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
+        df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
         if df is None:
             logger.info("No OHLCV data")
             return
 
-        analysis = strategy.analyze(df)
+        analysis = strategy.analyze(df, df5, df15)
         sig = analysis["signal"]
         logger.info(f"Scan: signal={sig} buy={analysis['buy_score']} sell={analysis['sell_score']} daily={daily}/{config.MAX_DAILY_TRADES}")
 
