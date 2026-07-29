@@ -22,6 +22,7 @@ db = Database()
 strategy = Strategy()
 trading_active = {}
 bot_app = None
+_cache = {"df": None, "df5": None, "df15": None, "time": 0}
 
 LANG = {
     "ar": {
@@ -331,9 +332,16 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             trading_active[uid] = True
             bal = f"{info['balance']:.2f}$" if info else "?"
 
-            df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
-            df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
-            df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
+            df = _cache.get("df")
+            df5 = _cache.get("df5")
+            df15 = _cache.get("df15")
+            cached_age = datetime.datetime.now().timestamp() - _cache.get("time", 0) if _cache.get("time") else 999
+            if df is None or cached_age > 15:
+                df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
+                df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
+                df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
+                if df is not None:
+                    _cache.update(df=df, df5=df5, df15=df15, time=datetime.datetime.now().timestamp())
             analysis = strategy.analyze(df, df5, df15) if df is not None else {"signal": "NONE"}
 
             txt = (
@@ -377,39 +385,44 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
     if d == "analyze":
         await q.answer()
-        connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
-        if connected:
-            df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
-            df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
-            df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
-            if df is not None:
-                a = strategy.analyze(df, df5, df15)
-                peak = L(uid, "peak_yes") if a.get("at_peak") else L(uid, "peak_no")
-                txt = (
-                    f"{'─'*30}\n  {L(uid, 'analysis')}\n{'─'*30}\n\n"
-                    f"{L(uid, 'signal')}: {a['signal']}\n"
-                    f"{L(uid, 'score')}: {a['strength']}\n"
-                    f"{L(uid, 'wins')}: {a['buy_score']} | {L(uid, 'losses')}: {a['sell_score']}\n"
-                    f"{L(uid, 'at_peak')}: {peak}\n"
-                    f"{'─'*30}\n"
-                    f"{L(uid, 'price')}: {a['price']}\n"
-                    f"SuperTrend: {a['st_dir']}\n"
-                    f"PSAR: {a['psar_dir']}\n"
-                    f"MACD: {a['macd']}\n"
-                    f"RSI: {a['rsi']}\n"
-                    f"EMA 5/10/20: {a['ema5']}/{a['ema10']}/{a['ema20']}\n"
-                    f"ATR: {a['atr_pips']:.1f} pips\n"
-                    f"Volume: {a['vol']}x\n\n"
-                    f"SL: {a['sl_pips']:.1f} pips\n"
-                    f"TP: {a['tp_pips']:.1f} pips\n"
-                    f"{L(uid, 'timeframes')}: M1+M5+M15"
-                )
-                if a["reasons"]:
-                    txt += f"\n\n{', '.join(a['reasons'])}"
-            else:
-                txt = L(uid, "no_data")
+        df = _cache.get("df")
+        df5 = _cache.get("df5")
+        df15 = _cache.get("df15")
+        cached_age = datetime.datetime.now().timestamp() - _cache.get("time", 0) if _cache.get("time") else 999
+        if df is None or cached_age > 15:
+            connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
+            if connected:
+                df = await asyncio.to_thread(mt5.get_ohlcv, config.TIMEFRAME, 250)
+                df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
+                df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
+                if df is not None:
+                    _cache.update(df=df, df5=df5, df15=df15, time=datetime.datetime.now().timestamp())
+        if df is not None:
+            a = strategy.analyze(df, df5, df15)
+            peak = L(uid, "peak_yes") if a.get("at_peak") else L(uid, "peak_no")
+            txt = (
+                f"{'─'*30}\n  {L(uid, 'analysis')}\n{'─'*30}\n\n"
+                f"{L(uid, 'signal')}: {a['signal']}\n"
+                f"{L(uid, 'score')}: {a['strength']}\n"
+                f"{L(uid, 'wins')}: {a['buy_score']} | {L(uid, 'losses')}: {a['sell_score']}\n"
+                f"{L(uid, 'at_peak')}: {peak}\n"
+                f"{'─'*30}\n"
+                f"{L(uid, 'price')}: {a['price']}\n"
+                f"SuperTrend: {a['st_dir']}\n"
+                f"PSAR: {a['psar_dir']}\n"
+                f"MACD: {a['macd']}\n"
+                f"RSI: {a['rsi']}\n"
+                f"EMA 5/10/20: {a['ema5']}/{a['ema10']}/{a['ema20']}\n"
+                f"ATR: {a['atr_pips']:.1f} pips\n"
+                f"Volume: {a['vol']}x\n\n"
+                f"SL: {a['sl_pips']:.1f} pips\n"
+                f"TP: {a['tp_pips']:.1f} pips\n"
+                f"{L(uid, 'timeframes')}: M1+M5+M15"
+            )
+            if a["reasons"]:
+                txt += f"\n\n{', '.join(a['reasons'])}"
         else:
-            txt = L(uid, "failed")
+            txt = L(uid, "no_data")
         await q.edit_message_text(txt, reply_markup=main_menu(uid))
         return
 
@@ -593,6 +606,12 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
 
         df5 = await asyncio.to_thread(mt5.get_ohlcv, "M5", 250)
         df15 = await asyncio.to_thread(mt5.get_ohlcv, "M15", 250)
+
+        global _cache
+        _cache["df"] = df
+        _cache["df5"] = df5
+        _cache["df15"] = df15
+        _cache["time"] = datetime.datetime.now().timestamp()
 
         analysis = strategy.analyze(df, df5, df15)
         sig = analysis["signal"]
