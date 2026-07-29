@@ -15,7 +15,11 @@ import mt5_manager as mt5
 from strategy import Strategy
 from news import fetch_forex_factory, is_high_impact_now, fetch_gold_news, get_market_sentiment
 
-logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
+logging.basicConfig(
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    level=logging.INFO,
+    handlers=[logging.FileHandler("bot_log.txt"), logging.StreamHandler()],
+)
 logger = logging.getLogger("GoldBot")
 
 db = Database()
