@@ -25,6 +25,7 @@ bot_app = None
 
 LANG = {
     "ar": {
+        "restart": "🔄 ابدأ من جديد",
         "start": "── ═══════════════ ──\n      نظام التداول الذهبية\n── ═══════════════ ──\n\nاختر من القائمة:",
         "account": "الحساب التجريبي",
         "real_account": "الحساب الحقيقي",
@@ -106,6 +107,7 @@ LANG = {
         "trades": "صفقات",
     },
     "en": {
+        "restart": "🔄 Restart",
         "start": "── ═══════════════ ──\n    Gold Trading System\n── ═══════════════ ──\n\nChoose from menu:",
         "account": "Demo Account",
         "real_account": "Real Account",
@@ -204,6 +206,7 @@ def kb(uid: int, rows: list) -> InlineKeyboardMarkup:
 
 def main_menu(uid: int) -> InlineKeyboardMarkup:
     btns = [
+        [InlineKeyboardButton(L(uid, "restart"), callback_data="restart")],
         [InlineKeyboardButton(L(uid, "account"), callback_data="acct"),
          InlineKeyboardButton(L(uid, "real_account"), callback_data="real_acct")],
         [InlineKeyboardButton(L(uid, "trade"), callback_data="start_trade"),
@@ -217,7 +220,7 @@ def main_menu(uid: int) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(L(uid, "lang_btn"), callback_data="lang_toggle")],
     ]
     if is_admin(uid):
-        btns.insert(2, [InlineKeyboardButton(L(uid, "admin"), callback_data="admin")])
+        btns.insert(3, [InlineKeyboardButton(L(uid, "admin"), callback_data="admin")])
     return kb(uid, btns)
 
 
@@ -257,7 +260,7 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
-    if d == "back":
+    if d == "back" or d == "restart":
         await q.answer()
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
