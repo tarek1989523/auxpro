@@ -1,0 +1,73 @@
+2026-07-29 01:34:28,163 | INFO | Starting Gold Trading Bot...
+2026-07-29 01:34:31,158 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 01:34:31,174 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 01:34:31,174 | INFO | Bot running...
+2026-07-29 01:34:31,551 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getMe "HTTP/1.1 200 OK"
+2026-07-29 01:34:31,662 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/setMyCommands "HTTP/1.1 200 OK"
+2026-07-29 01:34:31,766 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/deleteWebhook "HTTP/1.1 200 OK"
+2026-07-29 01:34:31,798 | INFO | Added job "trading_loop" to job store "default"
+2026-07-29 01:34:31,798 | INFO | Added job "daily_reset" to job store "default"
+2026-07-29 01:34:31,798 | INFO | Scheduler started
+2026-07-29 01:34:31,798 | INFO | Application started
+2026-07-29 01:34:41,164 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:34:51 UTC)" (scheduled at 2026-07-29 00:34:41.158256+00:00)
+2026-07-29 01:35:38,837 | INFO | Starting Gold Trading Bot...
+2026-07-29 01:35:41,664 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 01:35:41,672 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 01:35:41,672 | INFO | Bot running...
+2026-07-29 01:35:42,000 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getMe "HTTP/1.1 200 OK"
+2026-07-29 01:35:42,112 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/setMyCommands "HTTP/1.1 200 OK"
+2026-07-29 01:35:42,216 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/deleteWebhook "HTTP/1.1 200 OK"
+2026-07-29 01:35:42,224 | INFO | Added job "trading_loop" to job store "default"
+2026-07-29 01:35:42,224 | INFO | Added job "daily_reset" to job store "default"
+2026-07-29 01:35:42,224 | INFO | Scheduler started
+2026-07-29 01:35:42,224 | INFO | Application started
+2026-07-29 01:35:51,673 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:36:01 UTC)" (scheduled at 2026-07-29 00:35:51.656395+00:00)
+2026-07-29 01:37:39,129 | INFO | Starting Gold Trading Bot...
+2026-07-29 01:37:43,253 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 01:37:43,261 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 01:37:43,261 | INFO | Bot running...
+2026-07-29 01:37:43,671 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getMe "HTTP/1.1 200 OK"
+2026-07-29 01:37:43,835 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/setMyCommands "HTTP/1.1 200 OK"
+2026-07-29 01:37:44,275 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/deleteWebhook "HTTP/1.1 200 OK"
+2026-07-29 01:37:44,283 | INFO | Added job "trading_loop" to job store "default"
+2026-07-29 01:37:44,291 | INFO | Added job "daily_reset" to job store "default"
+2026-07-29 01:37:44,292 | INFO | Scheduler started
+2026-07-29 01:37:44,292 | INFO | Application started
+2026-07-29 01:37:53,248 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:03 UTC)" (scheduled at 2026-07-29 00:37:53.245775+00:00)
+2026-07-29 01:37:53,253 | INFO | Connected: 5053568767 (MetaQuotes-Demo) | 101304.91$
+2026-07-29 01:37:56,039 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 01:37:56,378 | INFO | Fetched 19 high-impact events
+2026-07-29 01:37:57,028 | INFO | Scan: SELL buy=3 sell=7 trend=NONE
+2026-07-29 01:37:57,036 | ERROR | Loop error: module 'config' has no attribute 'MAGIC'
+2026-07-29 01:37:57,036 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:03 UTC)" executed successfully
+2026-07-29 01:38:03,256 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:13 UTC)" (scheduled at 2026-07-29 00:38:03.245775+00:00)
+2026-07-29 01:38:05,457 | INFO | Fetched 19 high-impact events
+2026-07-29 01:38:05,931 | INFO | Scan: SELL buy=3 sell=8 trend=NONE
+2026-07-29 01:38:05,939 | ERROR | Loop error: module 'config' has no attribute 'MAGIC'
+2026-07-29 01:38:05,939 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:13 UTC)" executed successfully
+2026-07-29 01:38:06,303 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 01:38:13,264 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:23 UTC)" (scheduled at 2026-07-29 00:38:13.245775+00:00)
+2026-07-29 01:38:15,803 | INFO | Scan: SELL buy=3 sell=10 trend=NONE
+2026-07-29 01:38:15,803 | ERROR | Loop error: module 'config' has no attribute 'MAGIC'
+2026-07-29 01:38:15,803 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:23 UTC)" executed successfully
+2026-07-29 01:38:16,427 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 01:38:23,256 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:33 UTC)" (scheduled at 2026-07-29 00:38:23.245775+00:00)
+2026-07-29 01:38:25,810 | INFO | Scan: NONE buy=3 sell=4 trend=NONE
+2026-07-29 01:38:25,818 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:33 UTC)" executed successfully
+2026-07-29 01:38:26,543 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 01:38:33,260 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:43 UTC)" (scheduled at 2026-07-29 00:38:33.245775+00:00)
+2026-07-29 01:38:35,837 | INFO | Scan: NONE buy=3 sell=4 trend=NONE
+2026-07-29 01:38:35,837 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:43 UTC)" executed successfully
+2026-07-29 01:38:36,902 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 01:38:43,261 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:53 UTC)" (scheduled at 2026-07-29 00:38:43.245775+00:00)
+2026-07-29 01:38:45,730 | INFO | Scan: NONE buy=3 sell=4 trend=NONE
+2026-07-29 01:38:45,738 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:38:53 UTC)" executed successfully
+2026-07-29 01:38:47,221 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 01:38:53,252 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:39:03 UTC)" (scheduled at 2026-07-29 00:38:53.245775+00:00)
+2026-07-29 01:38:57,041 | INFO | Scan: NONE buy=3 sell=4 trend=NONE
+2026-07-29 01:38:57,041 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:39:03 UTC)" executed successfully
+2026-07-29 01:38:57,556 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 01:39:03,254 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:39:13 UTC)" (scheduled at 2026-07-29 00:39:03.245775+00:00)
+2026-07-29 01:39:06,149 | INFO | Scan: NONE buy=3 sell=4 trend=NONE
+2026-07-29 01:39:06,149 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 00:39:13 UTC)" executed successfully
+2026-07-29 01:39:07,659 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"

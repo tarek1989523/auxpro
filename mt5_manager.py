@@ -216,7 +216,7 @@ def close_position(ticket: int) -> bool:
         req = {
             "action": mt5.TRADE_ACTION_DEAL, "symbol": config.SYMBOL,
             "volume": p.volume, "type": close_type, "position": ticket,
-            "price": price, "deviation": 30, "magic": config.MAGIC,
+            "price": price, "deviation": 30, "magic": config.MAGIC_NUMBER,
             "comment": "ProfitClose", "type_time": mt5.ORDER_TIME_GTC,
             "type_filling": mt5.ORDER_FILLING_IOC,
         }
@@ -257,7 +257,7 @@ def trailing_stop():
                     "type": mt5.ORDER_TYPE_SELL if p.type == mt5.ORDER_TYPE_BUY else mt5.ORDER_TYPE_BUY,
                     "position": p.ticket,
                     "price": si.bid if p.type == mt5.ORDER_TYPE_BUY else si.ask,
-                    "deviation": 30, "magic": config.MAGIC,
+                    "deviation": 30, "magic": config.MAGIC_NUMBER,
                     "comment": "ProfitClose", "type_time": mt5.ORDER_TIME_GTC,
                     "type_filling": mt5.ORDER_FILLING_IOC,
                 })
