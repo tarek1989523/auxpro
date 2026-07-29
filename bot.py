@@ -245,28 +245,25 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     q = update.callback_query
     d = q.data
     uid = q.from_user.id
+    await q.answer()
 
     if d == "lang_ar":
         db.set_lang(uid, "ar")
-        await q.answer()
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
     if d == "lang_en":
         db.set_lang(uid, "en")
-        await q.answer()
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
     if d == "lang_toggle":
         lang = db.get_lang(uid)
         db.set_lang(uid, "en" if lang == "ar" else "ar")
-        await q.answer()
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
     if d == "back" or d == "restart":
-        await q.answer()
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
