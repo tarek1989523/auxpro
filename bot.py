@@ -30,7 +30,7 @@ _cache = {"df": None, "df5": None, "df15": None, "time": 0}
 
 LANG = {
     "ar": {
-        "restart": "🔄 ابدأ من جديد",
+        "restart": "⭐ ابدأ من جديد",
         "start": "── ═══════════════ ──\n      نظام التداول الذهبية\n── ═══════════════ ──\n\nاختر من القائمة:",
         "account": "الحساب التجريبي",
         "real_account": "الحساب الحقيقي",
@@ -112,7 +112,7 @@ LANG = {
         "trades": "صفقات",
     },
     "en": {
-        "restart": "🔄 Restart",
+        "restart": "⭐ Restart",
         "start": "── ═══════════════ ──\n    Gold Trading System\n── ═══════════════ ──\n\nChoose from menu:",
         "account": "Demo Account",
         "real_account": "Real Account",
@@ -231,14 +231,19 @@ def main_menu(uid: int) -> InlineKeyboardMarkup:
 
 async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     u = update.effective_user
-    db.add_user(u.id, u.username or "", u.full_name or "")
-    await update.message.reply_text(
-        L(u.id, "start"),
-        reply_markup=kb(uid=u.id, rows=[
-            [InlineKeyboardButton("English", callback_data="lang_en"),
-             InlineKeyboardButton("عربي", callback_data="lang_ar")],
-        ]),
-    )
+    uid = u.id
+    db.add_user(uid, u.username or "", u.full_name or "")
+    lang = db.get_lang(uid)
+    if lang:
+        await update.message.reply_text(L(uid, "start"), reply_markup=main_menu(uid))
+    else:
+        await update.message.reply_text(
+            L(u.id, "start"),
+            reply_markup=kb(uid=u.id, rows=[
+                [InlineKeyboardButton("English", callback_data="lang_en"),
+                 InlineKeyboardButton("عربي", callback_data="lang_ar")],
+            ]),
+        )
 
 
 async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
