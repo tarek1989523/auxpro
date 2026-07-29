@@ -2198,3 +2198,385 @@ KeyError: 'psar_dir'
 2026-07-29 02:27:25,894 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.55, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
 2026-07-29 02:27:25,894 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:32 UTC)" executed successfully
 2026-07-29 02:27:27,091 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:27:52,026 | INFO | Starting Gold Trading Bot...
+2026-07-29 02:27:55,031 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 02:27:55,047 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 02:27:55,047 | INFO | Bot running...
+2026-07-29 02:27:55,367 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getMe "HTTP/1.1 200 OK"
+2026-07-29 02:27:55,487 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/setMyCommands "HTTP/1.1 200 OK"
+2026-07-29 02:27:55,623 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/deleteWebhook "HTTP/1.1 200 OK"
+2026-07-29 02:27:55,631 | INFO | Added job "trading_loop" to job store "default"
+2026-07-29 02:27:55,631 | INFO | Added job "daily_reset" to job store "default"
+2026-07-29 02:27:55,631 | INFO | Scheduler started
+2026-07-29 02:27:55,631 | INFO | Application started
+2026-07-29 02:28:05,035 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:15 UTC)" (scheduled at 2026-07-29 01:28:05.023313+00:00)
+2026-07-29 02:28:05,037 | INFO | Connected: 5053568767 (MetaQuotes-Demo) | 101304.91$
+2026-07-29 02:28:05,930 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:28:06,606 | INFO | Fetched 19 high-impact events
+2026-07-29 02:28:06,862 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:28:06,862 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:15 UTC)" executed successfully
+2026-07-29 02:28:15,035 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:25 UTC)" (scheduled at 2026-07-29 01:28:15.023313+00:00)
+2026-07-29 02:28:16,040 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:28:16,944 | INFO | Fetched 19 high-impact events
+2026-07-29 02:28:17,177 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:28:17,177 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:25 UTC)" executed successfully
+2026-07-29 02:28:25,030 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:35 UTC)" (scheduled at 2026-07-29 01:28:25.023313+00:00)
+2026-07-29 02:28:26,158 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:28:26,729 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:28:26,729 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:35 UTC)" executed successfully
+2026-07-29 02:28:35,034 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:45 UTC)" (scheduled at 2026-07-29 01:28:35.023313+00:00)
+2026-07-29 02:28:36,265 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:28:36,735 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:28:36,735 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:45 UTC)" executed successfully
+2026-07-29 02:28:45,032 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:55 UTC)" (scheduled at 2026-07-29 01:28:45.023313+00:00)
+2026-07-29 02:28:46,352 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:28:46,722 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:28:46,722 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:28:55 UTC)" executed successfully
+2026-07-29 02:28:55,032 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:05 UTC)" (scheduled at 2026-07-29 01:28:55.023313+00:00)
+2026-07-29 02:28:56,464 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:28:56,856 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:28:56,856 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:05 UTC)" executed successfully
+2026-07-29 02:29:05,025 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:15 UTC)" (scheduled at 2026-07-29 01:29:05.023313+00:00)
+2026-07-29 02:29:06,639 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:07,120 | INFO | Scan: SELL buy=0 sell=13 trend=DN
+2026-07-29 02:29:07,120 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:15 UTC)" executed successfully
+2026-07-29 02:29:12,526 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:13,161 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/sendMessage "HTTP/1.1 200 OK"
+2026-07-29 02:29:15,031 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:25 UTC)" (scheduled at 2026-07-29 01:29:15.023313+00:00)
+2026-07-29 02:29:16,895 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:17,201 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:29:17,209 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:25 UTC)" executed successfully
+2026-07-29 02:29:17,209 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:17,658 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:18,147 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:29:25,024 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:35 UTC)" (scheduled at 2026-07-29 01:29:25.023313+00:00)
+2026-07-29 02:29:26,758 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:29:26,758 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:35 UTC)" executed successfully
+2026-07-29 02:29:27,014 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:29,448 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:29,955 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:30,192 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:29:35,034 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:45 UTC)" (scheduled at 2026-07-29 01:29:35.023313+00:00)
+2026-07-29 02:29:35,299 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:36,912 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:37,384 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:37,536 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:29:38,297 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:29:38,297 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:45 UTC)" executed successfully
+2026-07-29 02:29:42,536 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:43,378 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:44,636 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:29:45,033 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:55 UTC)" (scheduled at 2026-07-29 01:29:45.023313+00:00)
+2026-07-29 02:29:46,006 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:46,206 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:46,539 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 400 Bad Request"
+2026-07-29 02:29:46,547 | ERROR | No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\Desktop\auxpro\bot.py", line 294, in handler
+    await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_callbackquery.py", line 269, in edit_message_text
+    return await self._get_message().edit_text(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_message.py", line 4473, in edit_text
+    return await self.get_bot().edit_message_text(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 1763, in edit_message_text
+    return await super().edit_message_text(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4465, in edit_message_text
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 638, in _send_message
+    result = await super()._send_message(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 828, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 712, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 378, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 741, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2026-07-29 02:29:47,460 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:29:47,460 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:29:55 UTC)" executed successfully
+2026-07-29 02:29:55,024 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:30:05 UTC)" (scheduled at 2026-07-29 01:29:55.023313+00:00)
+2026-07-29 02:29:55,544 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:29:56,418 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:29:56,426 | INFO | Mismatch: need 106406869, have 5053568767. Retrying...
+2026-07-29 02:31:08,831 | INFO | Cannot login as 106406869. Reconnecting default...
+2026-07-29 02:32:14,140 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:30:05 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:32:14,197 | ERROR | FF fetch failed: HTTPSConnectionPool(host='nfs.faireconomy.media', port=443): Max retries exceeded with url: /ff_calendar_thisweek.json (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))
+2026-07-29 02:32:14,207 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:32:15 UTC)" executed successfully
+2026-07-29 02:32:14,819 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 400 Bad Request"
+2026-07-29 02:32:14,827 | ERROR | No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\Desktop\auxpro\bot.py", line 365, in handler
+    await q.answer()
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_callbackquery.py", line 190, in answer
+    return await self.get_bot().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 978, in answer_callback_query
+    return await super().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4362, in answer_callback_query
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 712, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 378, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 741, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Query is too old and response timeout expired or query id is invalid
+2026-07-29 02:32:15,029 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:32:25 UTC)" (scheduled at 2026-07-29 01:32:15.023313+00:00)
+2026-07-29 02:33:20,200 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:33:20,200 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:32:25 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:33:20,208 | ERROR | MT5 connect failed
+2026-07-29 02:33:20,208 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:33:25 UTC)" executed successfully
+2026-07-29 02:33:20,516 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:33:20,806 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 400 Bad Request"
+2026-07-29 02:33:20,806 | ERROR | No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\Desktop\auxpro\bot.py", line 275, in handler
+    await q.answer()
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_callbackquery.py", line 190, in answer
+    return await self.get_bot().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 978, in answer_callback_query
+    return await super().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4362, in answer_callback_query
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 712, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 378, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 741, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Query is too old and response timeout expired or query id is invalid
+2026-07-29 02:33:25,024 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:33:35 UTC)" (scheduled at 2026-07-29 01:33:25.023313+00:00)
+2026-07-29 02:34:30,478 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:34:30,478 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:34:30,478 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:33:35 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:34:30,478 | ERROR | MT5 connect failed
+2026-07-29 02:34:30,478 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:34:35 UTC)" executed successfully
+2026-07-29 02:34:35,051 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:34:45 UTC)" (scheduled at 2026-07-29 01:34:35.023313+00:00)
+2026-07-29 02:35:40,435 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:35:40,435 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:35:40,435 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:34:45 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:35:40,443 | ERROR | MT5 connect failed
+2026-07-29 02:35:40,443 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:35:45 UTC)" executed successfully
+2026-07-29 02:35:45,031 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:35:55 UTC)" (scheduled at 2026-07-29 01:35:45.023313+00:00)
+2026-07-29 02:36:50,550 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:36:50,550 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:36:50,558 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:35:55 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:36:50,558 | ERROR | MT5 connect failed
+2026-07-29 02:36:50,558 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:36:55 UTC)" executed successfully
+2026-07-29 02:36:55,035 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:37:05 UTC)" (scheduled at 2026-07-29 01:36:55.023313+00:00)
+2026-07-29 02:38:00,570 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:38:00,570 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:38:00,578 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:37:05 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:38:00,586 | ERROR | MT5 connect failed
+2026-07-29 02:38:00,586 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:38:05 UTC)" executed successfully
+2026-07-29 02:38:05,030 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:38:15 UTC)" (scheduled at 2026-07-29 01:38:05.023313+00:00)
+2026-07-29 02:39:10,943 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:39:10,943 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:39:10,943 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:38:15 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:39:10,951 | ERROR | MT5 connect failed
+2026-07-29 02:39:10,951 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:39:15 UTC)" executed successfully
+2026-07-29 02:39:15,034 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:39:25 UTC)" (scheduled at 2026-07-29 01:39:15.023313+00:00)
+2026-07-29 02:40:21,628 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:40:21,628 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:40:21,636 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:39:25 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:40:21,636 | ERROR | MT5 connect failed
+2026-07-29 02:40:21,636 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:40:25 UTC)" executed successfully
+2026-07-29 02:40:25,027 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:40:35 UTC)" (scheduled at 2026-07-29 01:40:25.023313+00:00)
+2026-07-29 02:41:30,931 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:41:30,931 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:41:30,939 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:40:35 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:41:30,939 | ERROR | MT5 connect failed
+2026-07-29 02:41:30,939 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:41:35 UTC)" executed successfully
+2026-07-29 02:41:35,036 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:41:45 UTC)" (scheduled at 2026-07-29 01:41:35.023313+00:00)
+2026-07-29 02:42:41,018 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:42:41,018 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:42:41,018 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:41:45 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:42:41,026 | ERROR | MT5 connect failed
+2026-07-29 02:42:41,026 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:42:45 UTC)" executed successfully
+2026-07-29 02:42:45,039 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:42:55 UTC)" (scheduled at 2026-07-29 01:42:45.023313+00:00)
+2026-07-29 02:43:50,497 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:43:50,497 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:43:50,497 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:42:55 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:43:50,505 | ERROR | MT5 connect failed
+2026-07-29 02:43:50,505 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:43:55 UTC)" executed successfully
+2026-07-29 02:43:55,026 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:44:05 UTC)" (scheduled at 2026-07-29 01:43:55.023313+00:00)
+2026-07-29 02:45:00,682 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:45:00,682 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:45:00,682 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:44:05 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:45:00,682 | ERROR | MT5 connect failed
+2026-07-29 02:45:00,682 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:45:05 UTC)" executed successfully
+2026-07-29 02:45:05,046 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:45:15 UTC)" (scheduled at 2026-07-29 01:45:05.023313+00:00)
+2026-07-29 02:46:10,843 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:46:10,843 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:45:15 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:46:10,851 | ERROR | MT5 connect failed
+2026-07-29 02:46:10,851 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:46:15 UTC)" executed successfully
+2026-07-29 02:46:11,179 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:46:11,507 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 400 Bad Request"
+2026-07-29 02:46:11,515 | ERROR | No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\Desktop\auxpro\bot.py", line 275, in handler
+    await q.answer()
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_callbackquery.py", line 190, in answer
+    return await self.get_bot().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 978, in answer_callback_query
+    return await super().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4362, in answer_callback_query
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 712, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 378, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 741, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Query is too old and response timeout expired or query id is invalid
+2026-07-29 02:46:15,034 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:46:25 UTC)" (scheduled at 2026-07-29 01:46:15.023313+00:00)
+2026-07-29 02:47:20,559 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:47:20,560 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:47:20,560 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:46:25 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:47:20,568 | ERROR | MT5 connect failed
+2026-07-29 02:47:20,568 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:47:25 UTC)" executed successfully
+2026-07-29 02:47:25,031 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:47:35 UTC)" (scheduled at 2026-07-29 01:47:25.023313+00:00)
+2026-07-29 02:48:30,736 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:48:30,736 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:48:30,736 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:47:35 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:48:30,736 | ERROR | MT5 connect failed
+2026-07-29 02:48:30,736 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:48:35 UTC)" executed successfully
+2026-07-29 02:48:35,030 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:48:45 UTC)" (scheduled at 2026-07-29 01:48:35.023313+00:00)
+2026-07-29 02:49:40,756 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:49:40,756 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:49:40,756 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:48:45 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:49:40,756 | ERROR | MT5 connect failed
+2026-07-29 02:49:40,756 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:49:45 UTC)" executed successfully
+2026-07-29 02:49:44,774 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 409 Conflict"
+2026-07-29 02:49:44,774 | ERROR | No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 680, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4767, in get_updates
+    await self._post(
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 712, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 378, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 741, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-07-29 02:49:45,038 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:49:55 UTC)" (scheduled at 2026-07-29 01:49:45.023313+00:00)
+2026-07-29 02:50:51,024 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:50:51,024 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:49:55 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:50:51,033 | ERROR | MT5 connect failed
+2026-07-29 02:50:51,033 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:50:55 UTC)" executed successfully
+2026-07-29 02:50:55,032 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:51:05 UTC)" (scheduled at 2026-07-29 01:50:55.023313+00:00)
+2026-07-29 02:52:00,777 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:52:00,777 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:52:00,777 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:51:05 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:52:00,785 | ERROR | MT5 connect failed
+2026-07-29 02:52:00,785 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:52:05 UTC)" executed successfully
+2026-07-29 02:52:05,024 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:52:15 UTC)" (scheduled at 2026-07-29 01:52:05.023313+00:00)
+2026-07-29 02:53:10,631 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:53:10,631 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:53:10,631 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:52:15 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:53:10,636 | ERROR | MT5 connect failed
+2026-07-29 02:53:10,636 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:53:15 UTC)" executed successfully
+2026-07-29 02:53:15,034 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:53:25 UTC)" (scheduled at 2026-07-29 01:53:15.023313+00:00)
+2026-07-29 02:54:20,934 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:54:20,934 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:54:20,942 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:53:25 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:54:20,942 | ERROR | MT5 connect failed
+2026-07-29 02:54:20,942 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:54:25 UTC)" executed successfully
+2026-07-29 02:54:25,028 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:54:35 UTC)" (scheduled at 2026-07-29 01:54:25.023313+00:00)
+2026-07-29 02:55:30,625 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:55:30,625 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:55:30,625 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:54:35 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:55:30,633 | ERROR | MT5 connect failed
+2026-07-29 02:55:30,633 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:55:35 UTC)" executed successfully
+2026-07-29 02:55:35,036 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:55:45 UTC)" (scheduled at 2026-07-29 01:55:35.023313+00:00)
+2026-07-29 02:56:40,848 | ERROR | MT5 init failed: (-10005, 'IPC timeout')
+2026-07-29 02:56:40,848 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:56:40,848 | WARNING | Execution of job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:55:45 UTC)" skipped: maximum number of running instances reached (1)
+2026-07-29 02:56:40,857 | ERROR | MT5 connect failed
+2026-07-29 02:56:40,857 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:56:45 UTC)" executed successfully
+2026-07-29 02:56:45,038 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:56:55 UTC)" (scheduled at 2026-07-29 01:56:45.023313+00:00)

@@ -44,3 +44,5 @@ TRAILING_STEP_PIPS = 10
 TRAILING_DISTANCE_PIPS = 10
 
 DATABASE_PATH = os.path.join(os.path.dirname(__file__), "trading.db")
+
+SIGNAL_SERVER_URL = "http://127.0.0.1:9999"

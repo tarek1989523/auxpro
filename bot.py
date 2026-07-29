@@ -673,6 +673,18 @@ async def notify_admin(text: str):
             logger.error(f"Notify failed to {uid}: {e}")
 
 
+def send_signal_to_api(sig_type: str, lot: float, price: float, sl: float, tp: float):
+    try:
+        import urllib.request, json
+        data = json.dumps({"type": sig_type, "lot": lot, "price": round(price, 2),
+                           "sl": round(sl, 2), "tp": round(tp, 2), "time": int(__import__("time").time())}).encode()
+        req = urllib.request.Request(config.SIGNAL_SERVER_URL + "/signal",
+                                     data=data, headers={"Content-Type": "application/json"}, method="POST")
+        urllib.request.urlopen(req, timeout=5)
+    except Exception as e:
+        logger.error(f"Signal server: {e}")
+
+
 async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
     try:
         connected = await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
@@ -746,6 +758,7 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
                 failed += 1
 
         if opened:
+            await asyncio.to_thread(send_signal_to_api, signal, config.LOT_SIZE, price, sl, tp)
             copied = await copy_to_real(signal, config.LOT_SIZE, sl, tp, price, trade_ids)
             emoji = "🟢" if signal == "BUY" else "🔴"
             reasons_str = ", ".join(analysis["reasons"]) if analysis["reasons"] else "-"
