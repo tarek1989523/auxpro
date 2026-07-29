@@ -50,6 +50,10 @@ class Database:
                 )
             """)
             conn.execute("INSERT OR IGNORE INTO stats (id) VALUES (1)")
+            try:
+                conn.execute("ALTER TABLE trades ADD COLUMN real_ticket INTEGER")
+            except sqlite3.OperationalError:
+                pass
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS real_accounts (
                     user_id INTEGER PRIMARY KEY,
@@ -104,6 +108,20 @@ class Database:
             else:
                 conn.execute("UPDATE stats SET total_losses = total_losses + 1, total_pnl = total_pnl + ? WHERE id = 1", (pnl,))
             conn.commit()
+
+    def set_real_ticket(self, trade_id: int, real_ticket: int):
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("UPDATE trades SET real_ticket = ? WHERE id = ?", (real_ticket, trade_id))
+            conn.commit()
+
+    def get_real_trades(self, user_id: int, limit: int = 20) -> list:
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            rows = conn.execute(
+                "SELECT * FROM trades WHERE user_id = ? AND real_ticket IS NOT NULL ORDER BY opened_at DESC LIMIT ?",
+                (user_id, limit),
+            ).fetchall()
+            return [dict(r) for r in rows]
 
     def get_open_trades(self) -> list:
         with sqlite3.connect(self.db_path) as conn:

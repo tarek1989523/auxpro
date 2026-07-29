@@ -1923,3 +1923,278 @@ telegram.error.BadRequest: Message is not modified: specified new message conten
 2026-07-29 02:20:35,627 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:20:43 UTC)" executed successfully
 2026-07-29 02:20:40,026 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
 2026-07-29 02:20:43,344 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:20:53 UTC)" (scheduled at 2026-07-29 01:20:43.324912+00:00)
+2026-07-29 02:21:38,884 | INFO | Starting Gold Trading Bot...
+2026-07-29 02:21:42,139 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 02:21:42,227 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-07-29 02:21:42,227 | INFO | Bot running...
+2026-07-29 02:21:42,619 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getMe "HTTP/1.1 200 OK"
+2026-07-29 02:21:42,732 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/setMyCommands "HTTP/1.1 200 OK"
+2026-07-29 02:21:42,844 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/deleteWebhook "HTTP/1.1 200 OK"
+2026-07-29 02:21:42,852 | INFO | Added job "trading_loop" to job store "default"
+2026-07-29 02:21:42,860 | INFO | Added job "daily_reset" to job store "default"
+2026-07-29 02:21:42,860 | INFO | Scheduler started
+2026-07-29 02:21:42,860 | INFO | Application started
+2026-07-29 02:21:52,113 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:02 UTC)" (scheduled at 2026-07-29 01:21:52.107601+00:00)
+2026-07-29 02:21:52,113 | INFO | Connected: 5053568767 (MetaQuotes-Demo) | 101304.91$
+2026-07-29 02:21:53,231 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:21:53,718 | INFO | Fetched 19 high-impact events
+2026-07-29 02:21:54,022 | INFO | Scan: NONE buy=4 sell=2 trend=NONE
+2026-07-29 02:21:54,022 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:02 UTC)" executed successfully
+2026-07-29 02:22:02,118 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:12 UTC)" (scheduled at 2026-07-29 01:22:02.107601+00:00)
+2026-07-29 02:22:03,333 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:03,629 | INFO | Fetched 19 high-impact events
+2026-07-29 02:22:03,894 | INFO | Scan: NONE buy=4 sell=4 trend=NONE
+2026-07-29 02:22:03,894 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:12 UTC)" executed successfully
+2026-07-29 02:22:12,145 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:22 UTC)" (scheduled at 2026-07-29 01:22:12.107601+00:00)
+2026-07-29 02:22:13,449 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:16,722 | INFO | Scan: NONE buy=4 sell=4 trend=NONE
+2026-07-29 02:22:16,722 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:22 UTC)" executed successfully
+2026-07-29 02:22:20,987 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:22,107 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:22,123 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:32 UTC)" (scheduled at 2026-07-29 01:22:22.107601+00:00)
+2026-07-29 02:22:22,483 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:25,872 | INFO | Scan: NONE buy=4 sell=2 trend=NONE
+2026-07-29 02:22:25,872 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:32 UTC)" executed successfully
+2026-07-29 02:22:27,212 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:27,498 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:27,639 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:28,411 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:28,568 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:28,942 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:32,111 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:42 UTC)" (scheduled at 2026-07-29 01:22:32.107601+00:00)
+2026-07-29 02:22:32,582 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:32,751 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/sendMessage "HTTP/1.1 200 OK"
+2026-07-29 02:22:34,152 | INFO | Scan: NONE buy=4 sell=4 trend=NONE
+2026-07-29 02:22:34,157 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:42 UTC)" executed successfully
+2026-07-29 02:22:35,405 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:35,779 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:35,963 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:22:42,110 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:52 UTC)" (scheduled at 2026-07-29 01:22:42.107601+00:00)
+2026-07-29 02:22:44,425 | INFO | Scan: NONE buy=5 sell=2 trend=NONE
+2026-07-29 02:22:44,425 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:22:52 UTC)" executed successfully
+2026-07-29 02:22:45,425 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:22:46,041 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:46,419 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:22:46,801 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:22:52,110 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:02 UTC)" (scheduled at 2026-07-29 01:22:52.107601+00:00)
+2026-07-29 02:22:54,730 | INFO | Scan: NONE buy=5 sell=2 trend=NONE
+2026-07-29 02:22:54,730 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:02 UTC)" executed successfully
+2026-07-29 02:22:55,549 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:01,375 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:02,119 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:12 UTC)" (scheduled at 2026-07-29 01:23:02.107601+00:00)
+2026-07-29 02:23:02,378 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:02,765 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:03,144 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:04,130 | INFO | Scan: NONE buy=5 sell=2 trend=NONE
+2026-07-29 02:23:04,130 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:12 UTC)" executed successfully
+2026-07-29 02:23:05,447 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:05,803 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:06,177 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:08,459 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:08,843 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:09,364 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:09,494 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:12,113 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:22 UTC)" (scheduled at 2026-07-29 01:23:12.107601+00:00)
+2026-07-29 02:23:13,100 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:13,253 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:13,406 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:14,000 | INFO | Scan: NONE buy=4 sell=2 trend=NONE
+2026-07-29 02:23:14,000 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:22 UTC)" executed successfully
+2026-07-29 02:23:14,777 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:14,924 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:15,306 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:19,559 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:19,864 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:19,998 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:20,242 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:22,124 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:32 UTC)" (scheduled at 2026-07-29 01:23:22.107601+00:00)
+2026-07-29 02:23:25,079 | INFO | Scan: NONE buy=4 sell=5 trend=NONE
+2026-07-29 02:23:25,079 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:32 UTC)" executed successfully
+2026-07-29 02:23:29,029 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:29,582 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:29,741 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:29,856 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:32,118 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:42 UTC)" (scheduled at 2026-07-29 01:23:32.107601+00:00)
+2026-07-29 02:23:34,538 | INFO | Scan: NONE buy=5 sell=4 trend=NONE
+2026-07-29 02:23:34,538 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:42 UTC)" executed successfully
+2026-07-29 02:23:34,538 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:34,693 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:35,060 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:37,720 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:38,099 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:38,482 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:40,611 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:40,757 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:41,141 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:41,521 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:42,119 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:52 UTC)" (scheduled at 2026-07-29 01:23:42.107601+00:00)
+2026-07-29 02:23:44,056 | INFO | Scan: NONE buy=5 sell=2 trend=NONE
+2026-07-29 02:23:44,056 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:23:52 UTC)" executed successfully
+2026-07-29 02:23:44,942 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:45,315 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:45,698 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:46,081 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:48,912 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:49,122 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:49,517 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:50,814 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:23:50,903 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:51,017 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:23:51,404 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:23:52,119 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:02 UTC)" (scheduled at 2026-07-29 01:23:52.107601+00:00)
+2026-07-29 02:23:54,912 | INFO | Scan: NONE buy=4 sell=2 trend=NONE
+2026-07-29 02:23:54,912 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:02 UTC)" executed successfully
+2026-07-29 02:24:00,899 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:24:02,114 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:12 UTC)" (scheduled at 2026-07-29 01:24:02.107601+00:00)
+2026-07-29 02:24:04,483 | INFO | Scan: NONE buy=4 sell=2 trend=NONE
+2026-07-29 02:24:04,483 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:12 UTC)" executed successfully
+2026-07-29 02:24:11,202 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:24:12,119 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:22 UTC)" (scheduled at 2026-07-29 01:24:12.107601+00:00)
+2026-07-29 02:24:14,098 | INFO | Scan: NONE buy=4 sell=2 trend=NONE
+2026-07-29 02:24:14,098 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:22 UTC)" executed successfully
+2026-07-29 02:24:21,493 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:24:22,127 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:32 UTC)" (scheduled at 2026-07-29 01:24:22.107601+00:00)
+2026-07-29 02:24:25,677 | INFO | Scan: NONE buy=4 sell=5 trend=NONE
+2026-07-29 02:24:25,677 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:32 UTC)" executed successfully
+2026-07-29 02:24:32,095 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:24:32,111 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:42 UTC)" (scheduled at 2026-07-29 01:24:32.107601+00:00)
+2026-07-29 02:24:33,229 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:24:33,813 | INFO | Scan: NONE buy=4 sell=5 trend=NONE
+2026-07-29 02:24:33,813 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:42 UTC)" executed successfully
+2026-07-29 02:24:34,073 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:24:34,162 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:24:34,333 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:24:42,121 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:52 UTC)" (scheduled at 2026-07-29 01:24:42.107601+00:00)
+2026-07-29 02:24:43,537 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:24:43,887 | INFO | Scan: NONE buy=4 sell=2 trend=NONE
+2026-07-29 02:24:43,887 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:24:52 UTC)" executed successfully
+2026-07-29 02:24:52,117 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:02 UTC)" (scheduled at 2026-07-29 01:24:52.107601+00:00)
+2026-07-29 02:24:53,723 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:24:55,405 | INFO | Scan: NONE buy=4 sell=4 trend=NONE
+2026-07-29 02:24:55,413 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:02 UTC)" executed successfully
+2026-07-29 02:25:02,119 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:12 UTC)" (scheduled at 2026-07-29 01:25:02.107601+00:00)
+2026-07-29 02:25:03,808 | INFO | Scan: SELL buy=-1 sell=7 trend=DN
+2026-07-29 02:25:03,808 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:12 UTC)" executed successfully
+2026-07-29 02:25:04,010 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:12,116 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:22 UTC)" (scheduled at 2026-07-29 01:25:12.107601+00:00)
+2026-07-29 02:25:13,765 | INFO | Scan: SELL buy=0 sell=7 trend=DN
+2026-07-29 02:25:13,765 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:22 UTC)" executed successfully
+2026-07-29 02:25:14,107 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:22,111 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:32 UTC)" (scheduled at 2026-07-29 01:25:22.107601+00:00)
+2026-07-29 02:25:23,912 | INFO | Scan: SELL buy=1 sell=7 trend=DN
+2026-07-29 02:25:23,912 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:32 UTC)" executed successfully
+2026-07-29 02:25:24,203 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:32,112 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:42 UTC)" (scheduled at 2026-07-29 01:25:32.107601+00:00)
+2026-07-29 02:25:34,873 | INFO | Scan: SELL buy=-1 sell=7 trend=DN
+2026-07-29 02:25:34,881 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:42 UTC)" executed successfully
+2026-07-29 02:25:34,881 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:40,763 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:42,120 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:52 UTC)" (scheduled at 2026-07-29 01:25:42.107601+00:00)
+2026-07-29 02:25:42,352 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:25:42,491 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:25:42,863 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:25:44,797 | INFO | Scan: SELL buy=-1 sell=7 trend=DN
+2026-07-29 02:25:44,805 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:25:52 UTC)" executed successfully
+2026-07-29 02:25:48,947 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:50,086 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:25:50,504 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:25:52,114 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:02 UTC)" (scheduled at 2026-07-29 01:25:52.107601+00:00)
+2026-07-29 02:25:52,631 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:52,881 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:25:53,203 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:25:54,448 | INFO | Scan: SELL buy=4 sell=9 trend=DN
+2026-07-29 02:25:54,448 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:02 UTC)" executed successfully
+2026-07-29 02:25:56,169 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:25:56,541 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:25:56,924 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:25:57,309 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:25:58,194 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:26:00,379 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:00,767 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:26:00,879 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:26:01,107 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/editMessageText "HTTP/1.1 200 OK"
+2026-07-29 02:26:02,130 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:12 UTC)" (scheduled at 2026-07-29 01:26:02.107601+00:00)
+2026-07-29 02:26:06,859 | INFO | Scan: SELL buy=4 sell=6 trend=DN
+2026-07-29 02:26:06,867 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4016.37, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:26:06,867 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4016.37, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719561661, position_by=0))
+2026-07-29 02:26:06,867 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4016.37, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719562417, position_by=0))
+2026-07-29 02:26:06,867 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:12 UTC)" executed successfully
+2026-07-29 02:26:10,692 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:11,451 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:12,130 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:22 UTC)" (scheduled at 2026-07-29 01:26:12.107601+00:00)
+2026-07-29 02:26:12,291 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:26:12,509 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:26:13,190 | ERROR | No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\Desktop\auxpro\bot.py", line 459, in handler
+    f"PSAR: {a['psar_dir']}\n"
+             ~^^^^^^^^^^^^
+KeyError: 'psar_dir'
+2026-07-29 02:26:15,071 | INFO | Scan: SELL buy=4 sell=9 trend=DN
+2026-07-29 02:26:15,071 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.14, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:26:15,079 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.14, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719561661, position_by=0))
+2026-07-29 02:26:15,079 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.14, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719562417, position_by=0))
+2026-07-29 02:26:15,079 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:22 UTC)" executed successfully
+2026-07-29 02:26:15,543 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:15,942 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:26:16,176 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-07-29 02:26:16,474 | ERROR | No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\fanya\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fanya\Desktop\auxpro\bot.py", line 459, in handler
+    f"PSAR: {a['psar_dir']}\n"
+             ~^^^^^^^^^^^^
+KeyError: 'psar_dir'
+2026-07-29 02:26:22,111 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:32 UTC)" (scheduled at 2026-07-29 01:26:22.107601+00:00)
+2026-07-29 02:26:25,103 | INFO | Scan: SELL buy=4 sell=9 trend=DN
+2026-07-29 02:26:25,111 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.06, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:26:25,111 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.06, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719561661, position_by=0))
+2026-07-29 02:26:25,111 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.06, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719562417, position_by=0))
+2026-07-29 02:26:25,119 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:32 UTC)" executed successfully
+2026-07-29 02:26:25,898 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:32,117 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:42 UTC)" (scheduled at 2026-07-29 01:26:32.107601+00:00)
+2026-07-29 02:26:34,927 | INFO | Scan: SELL buy=4 sell=9 trend=DN
+2026-07-29 02:26:34,927 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.31, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:26:34,927 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.31, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719561661, position_by=0))
+2026-07-29 02:26:34,927 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:42 UTC)" executed successfully
+2026-07-29 02:26:36,244 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:42,129 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:52 UTC)" (scheduled at 2026-07-29 01:26:42.107601+00:00)
+2026-07-29 02:26:44,437 | INFO | Scan: SELL buy=4 sell=9 trend=DN
+2026-07-29 02:26:44,445 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.01, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:26:44,445 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.01, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719561661, position_by=0))
+2026-07-29 02:26:44,445 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.01, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719562417, position_by=0))
+2026-07-29 02:26:44,445 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:26:52 UTC)" executed successfully
+2026-07-29 02:26:46,369 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:52,124 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:02 UTC)" (scheduled at 2026-07-29 01:26:52.107601+00:00)
+2026-07-29 02:26:56,617 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:26:57,800 | INFO | Scan: SELL buy=4 sell=9 trend=DN
+2026-07-29 02:26:57,816 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4016.83, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:26:57,816 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4016.83, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719561661, position_by=0))
+2026-07-29 02:26:57,816 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4016.83, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719562417, position_by=0))
+2026-07-29 02:26:57,816 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:02 UTC)" executed successfully
+2026-07-29 02:27:02,114 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:12 UTC)" (scheduled at 2026-07-29 01:27:02.107601+00:00)
+2026-07-29 02:27:05,072 | INFO | Scan: SELL buy=0 sell=9 trend=DN
+2026-07-29 02:27:05,112 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.6, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:27:05,152 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:12 UTC)" executed successfully
+2026-07-29 02:27:06,744 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:27:12,110 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:22 UTC)" (scheduled at 2026-07-29 01:27:12.107601+00:00)
+2026-07-29 02:27:14,334 | INFO | Scan: SELL buy=0 sell=10 trend=DN
+2026-07-29 02:27:14,342 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.47, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=1, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719559535, position_by=0))
+2026-07-29 02:27:14,342 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.77, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:27:14,350 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:22 UTC)" executed successfully
+2026-07-29 02:27:16,963 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"
+2026-07-29 02:27:22,120 | INFO | Running job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:32 UTC)" (scheduled at 2026-07-29 01:27:22.107601+00:00)
+2026-07-29 02:27:25,550 | INFO | Fetched 19 high-impact events
+2026-07-29 02:27:25,894 | INFO | Scan: SELL buy=0 sell=9 trend=DN
+2026-07-29 02:27:25,894 | ERROR | Close failed: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=202607, order=0, symbol='XAUUSD', volume=0.11, price=4017.55, stoplimit=0.0, sl=0.0, tp=0.0, deviation=30, type=0, type_filling=1, type_time=0, expiration=0, comment='ProfitClose', position=57719560844, position_by=0))
+2026-07-29 02:27:25,894 | INFO | Job "trading_loop (trigger: interval[0:00:10], next run at: 2026-07-29 01:27:32 UTC)" executed successfully
+2026-07-29 02:27:27,091 | INFO | HTTP Request: POST https://api.telegram.org/bot8965805344:AAFbQMLySH2btp3fDl-RgxGD23d_BeIBx7A/getUpdates "HTTP/1.1 200 OK"

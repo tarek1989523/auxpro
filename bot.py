@@ -96,6 +96,7 @@ LANG = {
         "real_disconnect_btn": "فصل الحساب",
         "real_error_digits": "❌ خطأ: رقم الحساب يجب أن يكون أرقام فقط",
         "real_saved": "✅ تم حفظ بيانات الحساب الحقيقي",
+        "no_real_trades": "لا توجد صفقات منسوخة بعد",
         "real_will_copy": "سيتم نسخ الصفقات تلقائياً عند فتحها.",
         "real_wrong_format": "❌ تنسيق غير صحيح",
         "account_info": "معلومات الحساب",
@@ -181,8 +182,9 @@ LANG = {
         "real_example": "Example:",
         "real_disconnected": "Real account disconnected ✅",
         "real_disconnect_btn": "Disconnect",
-        "real_error_digits": "❌ Error: Login must contain only numbers",
+        "real_error_digits": "❌ Error: Login must be numbers only",
         "real_saved": "✅ Real account saved",
+        "no_real_trades": "No copied trades yet",
         "real_will_copy": "Trades will be copied automatically when opened.",
         "real_wrong_format": "❌ Invalid format",
         "account_info": "Account Info",
@@ -315,15 +317,37 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     if d == "real_acct":
         ra = await asyncio.to_thread(db.get_real_account, uid)
         if ra:
+            real_balance = "?"
+            real_eq = "?"
+            try:
+                ok = await asyncio.to_thread(mt5.connect, ra["login"], ra["password"], ra["server"])
+                if ok:
+                    info = await asyncio.to_thread(mt5.account_info)
+                    if info:
+                        real_balance = f"{info['balance']:.2f}$"
+                        real_eq = f"{info['equity']:.2f}$"
+                    await asyncio.to_thread(mt5.connect, config.DEMO_LOGIN, config.DEMO_PASSWORD, config.DEMO_SERVER)
+            except Exception:
+                pass
+
+            trades = await asyncio.to_thread(db.get_real_trades, uid, 10)
             txt = (
                 f"{'─'*30}\n"
                 f"  {L(uid, 'real_account')}\n"
                 f"{'─'*30}\n\n"
                 f"{L(uid, 'login')}: {ra['login']}\n"
                 f"{L(uid, 'server')}: {ra['server']}\n"
-                f"{L(uid, 'real_connected')}\n\n"
-                f"{L(uid, 'real_copying')}"
+                f"{L(uid, 'balance')}: {real_balance}\n"
+                f"{L(uid, 'equity')}: {real_eq}\n\n"
             )
+            if trades:
+                txt += f"  ── {L(uid, 'trades')} ──\n\n"
+                for t in trades:
+                    p = t.get("pnl", 0) or 0
+                    s = "+" if p >= 0 else ""
+                    txt += f"{t['signal']} | {t['lot']} lot | {s}{p:.2f}$\n"
+            else:
+                txt += f"{L(uid, 'no_real_trades')}\n"
             btns = [[InlineKeyboardButton(L(uid, "real_disconnect_btn"), callback_data="real_disconnect"),
                      InlineKeyboardButton(L(uid, "back"), callback_data="back")]]
         else:
@@ -616,7 +640,7 @@ async def handle_text(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         )
 
 
-async def copy_to_real(order_type: str, lot: float, sl: float, tp: float, price: float) -> bool:
+async def copy_to_real(order_type: str, lot: float, sl: float, tp: float, price: float, trade_ids: list = None) -> bool:
     accounts = await asyncio.to_thread(db.get_all_active_real_accounts)
     if not accounts:
         return False
@@ -628,6 +652,9 @@ async def copy_to_real(order_type: str, lot: float, sl: float, tp: float, price:
                 res = await asyncio.to_thread(mt5.open_order, order_type, lot, sl, tp)
                 if res:
                     copied += 1
+                    if trade_ids:
+                        for tid in trade_ids:
+                            await asyncio.to_thread(db.set_real_ticket, tid, res["ticket"])
                     logger.info(f"Copied to real {acc['login']}: {order_type} #{res['ticket']}")
         except Exception as e:
             logger.error(f"Copy failed to {acc['login']}: {e}")
@@ -706,18 +733,20 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
             return
 
         opened = []
+        trade_ids = []
         failed = 0
 
         for i in range(open_count):
             result = await asyncio.to_thread(mt5.open_order, signal, config.LOT_SIZE, sl, tp)
             if result:
-                db.add_trade(0, signal, result["price"], sl, tp, config.LOT_SIZE, result["ticket"])
+                trade_id = db.add_trade(0, signal, result["price"], sl, tp, config.LOT_SIZE, result["ticket"])
                 opened.append(result["ticket"])
+                trade_ids.append(trade_id)
             else:
                 failed += 1
 
         if opened:
-            copied = await copy_to_real(signal, config.LOT_SIZE, sl, tp, price)
+            copied = await copy_to_real(signal, config.LOT_SIZE, sl, tp, price, trade_ids)
             emoji = "🟢" if signal == "BUY" else "🔴"
             reasons_str = ", ".join(analysis["reasons"]) if analysis["reasons"] else "-"
             txt = (
