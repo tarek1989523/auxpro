@@ -25,6 +25,7 @@ logger = logging.getLogger("GoldBot")
 db = Database()
 strategy = Strategy()
 trading_active = {}
+trading_active_real = {}
 bot_app = None
 _cache = {"df": None, "df5": None, "df15": None, "time": 0}
 
@@ -34,8 +35,13 @@ LANG = {
         "start": "── ═══════════════ ──\n      نظام التداول الذهبية\n── ═══════════════ ──\n\nاختر من القائمة:",
         "account": "الحساب التجريبي",
         "real_account": "الحساب الحقيقي",
-        "trade": "ابدأ التداول",
-        "stop": "أوقف التداول",
+        "trade": "التداول",
+        "start_trade": "ابدأ التداول",
+        "stop_trade": "أوقف التداول",
+        "demo": "تجريبي",
+        "real": "حقيقي",
+        "trading_off_demo": "تم إيقاف التداول التجريبي",
+        "trading_off_real": "تم إيقاف التداول الحقيقي",
         "positions": "الصفقات المفتوحة",
         "analyze": "تحليل السوق",
         "results": "النتائج",
@@ -116,8 +122,13 @@ LANG = {
         "start": "── ═══════════════ ──\n    Gold Trading System\n── ═══════════════ ──\n\nChoose from menu:",
         "account": "Demo Account",
         "real_account": "Real Account",
-        "trade": "Start Trading",
-        "stop": "Stop Trading",
+        "trade": "Trading",
+        "start_trade": "Start Trading",
+        "stop_trade": "Stop Trading",
+        "demo": "Demo",
+        "real": "Real",
+        "trading_off_demo": "Demo trading stopped",
+        "trading_off_real": "Real trading stopped",
         "positions": "Open Positions",
         "analyze": "Market Analysis",
         "results": "Results",
@@ -214,19 +225,28 @@ def main_menu(uid: int) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(L(uid, "restart"), callback_data="restart")],
         [InlineKeyboardButton(L(uid, "account"), callback_data="acct"),
          InlineKeyboardButton(L(uid, "real_account"), callback_data="real_acct")],
-        [InlineKeyboardButton(L(uid, "trade"), callback_data="start_trade"),
-         InlineKeyboardButton(L(uid, "stop"), callback_data="stop_trade")],
-        [InlineKeyboardButton(L(uid, "positions"), callback_data="positions"),
-         InlineKeyboardButton(L(uid, "analyze"), callback_data="analyze")],
-        [InlineKeyboardButton(L(uid, "news"), callback_data="news"),
-         InlineKeyboardButton(L(uid, "results"), callback_data="results")],
-        [InlineKeyboardButton(L(uid, "settings"), callback_data="settings"),
-         InlineKeyboardButton(L(uid, "help"), callback_data="help")],
+        [InlineKeyboardButton(L(uid, "trade"), callback_data="trade_menu"),
+         InlineKeyboardButton(L(uid, "positions"), callback_data="positions")],
+        [InlineKeyboardButton(L(uid, "analyze"), callback_data="analyze"),
+         InlineKeyboardButton(L(uid, "news"), callback_data="news")],
+        [InlineKeyboardButton(L(uid, "results"), callback_data="results"),
+         InlineKeyboardButton(L(uid, "settings"), callback_data="settings")],
+        [InlineKeyboardButton(L(uid, "help"), callback_data="help")],
         [InlineKeyboardButton(L(uid, "lang_btn"), callback_data="lang_toggle")],
     ]
     if is_admin(uid):
         btns.insert(3, [InlineKeyboardButton(L(uid, "admin"), callback_data="admin")])
     return kb(uid, btns)
+
+
+def trade_menu(uid: int) -> InlineKeyboardMarkup:
+    return kb(uid, [
+        [InlineKeyboardButton(f"{L(uid, 'start_trade')} ({L(uid, 'demo')})", callback_data="start_demo"),
+         InlineKeyboardButton(f"{L(uid, 'stop_trade')} ({L(uid, 'demo')})", callback_data="stop_demo")],
+        [InlineKeyboardButton(f"{L(uid, 'start_trade')} ({L(uid, 'real')})", callback_data="start_real"),
+         InlineKeyboardButton(f"{L(uid, 'stop_trade')} ({L(uid, 'real')})", callback_data="stop_real")],
+        [InlineKeyboardButton(L(uid, "back"), callback_data="back")],
+    ])
 
 
 async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
@@ -328,7 +348,11 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await q.edit_message_text(L(uid, "start"), reply_markup=main_menu(uid))
         return
 
-    if d == "start_trade":
+    if d == "trade_menu":
+        await q.edit_message_text(L(uid, "trade"), reply_markup=trade_menu(uid))
+        return
+
+    if d == "start_demo":
         await q.answer()
         await q.edit_message_text(L(uid, "connecting"))
 
@@ -366,10 +390,27 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await q.edit_message_text(txt, reply_markup=main_menu(uid))
         return
 
-    if d == "stop_trade":
+    if d == "stop_demo":
         trading_active[uid] = False
-        await q.answer(L(uid, "trading_off"), show_alert=True)
-        await q.edit_message_text(L(uid, "trading_off"), reply_markup=main_menu(uid))
+        await q.answer(L(uid, "trading_off_demo"), show_alert=True)
+        await q.edit_message_text(L(uid, "trading_off_demo"), reply_markup=main_menu(uid))
+        return
+
+    if d == "start_real":
+        await q.answer()
+        ra = await asyncio.to_thread(db.get_real_account, uid)
+        if not ra:
+            txt = L(uid, "real_no_account")
+        else:
+            trading_active_real[uid] = True
+            txt = f"{L(uid, 'real_connected')}\n{L(uid, 'real_copying')}"
+        await q.edit_message_text(txt, reply_markup=main_menu(uid))
+        return
+
+    if d == "stop_real":
+        trading_active_real[uid] = False
+        await q.answer(L(uid, "trading_off_real"), show_alert=True)
+        await q.edit_message_text(L(uid, "trading_off_real"), reply_markup=main_menu(uid))
         return
 
     if d == "positions":
@@ -632,6 +673,9 @@ async def trading_loop(ctx: ContextTypes.DEFAULT_TYPE):
         analysis = strategy.analyze(df, df5, df15)
         sig = analysis["signal"]
         logger.info(f"Scan: {sig} buy={analysis['buy_score']} sell={analysis['sell_score']} trend={analysis.get('trend','?')}")
+
+        if not any(trading_active.values()):
+            return
 
         if sig not in ("BUY", "SELL"):
             return
