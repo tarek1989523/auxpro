@@ -166,3 +166,19 @@ def get_market_sentiment(news: list) -> dict:
         return {"label": "BEARISH", "score": -1, "emoji": "🔴", "count": total, "bull": bull, "bear": bear}
     else:
         return {"label": "MIXED", "score": 0, "emoji": "🟡", "count": total, "bull": bull, "bear": bear}
+
+
+def translate_to_arabic(text: str) -> str:
+    if not text or len(text.strip()) < 3:
+        return text
+    try:
+        url = "https://translate.googleapis.com/translate_a/single"
+        params = {"client": "gtx", "sl": "en", "tl": "ar", "dt": "t", "q": text}
+        r = requests.get(url, params=params, timeout=8)
+        if r.status_code == 200:
+            parts = r.json()
+            result = "".join(p[0] for p in parts[0] if p[0])
+            return result if result else text
+    except Exception:
+        pass
+    return text

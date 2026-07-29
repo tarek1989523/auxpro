@@ -13,7 +13,7 @@ import config
 from database import Database
 import mt5_manager as mt5
 from strategy import Strategy
-from news import fetch_forex_factory, is_high_impact_now, fetch_gold_news, get_market_sentiment
+from news import fetch_forex_factory, is_high_impact_now, fetch_gold_news, get_market_sentiment, translate_to_arabic
 
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(message)s",
@@ -506,6 +506,10 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         sentiment = get_market_sentiment(news)
         status = L(uid, "stop_trading") if now_trading else L(uid, "safe_to_trade")
 
+        lang = db.get_lang(uid)
+        if lang == "ar" and sentiment.get("label"):
+            sentiment["label"] = await asyncio.to_thread(translate_to_arabic, sentiment["label"])
+
         txt = (
             f"{'─'*30}\n  {L(uid, 'news_title')}\n{'─'*30}\n\n"
             f"{L(uid, 'status')}: {status}\n"
@@ -515,12 +519,18 @@ async def handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
         for i, n in enumerate(news[:5], 1):
             s = n["sentiment"]
-            txt += f"{s['emoji']} {n['title'][:60]}\n   {n['source']}\n\n"
+            title = n["title"][:60]
+            if lang == "ar":
+                title = await asyncio.to_thread(translate_to_arabic, title)
+            txt += f"{s['emoji']} {title}\n   {n['source']}\n\n"
 
         if events:
             txt += f"{'─'*30}\n  {L(uid, 'economic_calendar')}\n{'─'*30}\n\n"
             for e in events[:3]:
-                txt += f"  {e['country']} | {e['title']}\n"
+                title = e['title']
+                if lang == "ar":
+                    title = await asyncio.to_thread(translate_to_arabic, title)
+                txt += f"  {e['country']} | {title}\n"
 
         await q.edit_message_text(txt, reply_markup=main_menu(uid))
         return
